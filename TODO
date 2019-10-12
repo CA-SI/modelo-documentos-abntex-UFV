@@ -1,0 +1,9 @@
+# Modelo de Documentos AbnTex UFV
+[![GitHub contributors](https://img.shields.io/github/contributors/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV)
+[![GitHub stars](https://img.shields.io/github/stars/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/network)
+[![GitHub license](https://img.shields.io/github/license/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV)
+[![Discord](https://img.shields.io/discord/365311890420793346.svg?style=flat-square)](https://discord.gg/aR6cGkG)
+
+## Todo List
+- [ ] Refatorar o Gulp a fim de tornar um orquestrador de documentos
