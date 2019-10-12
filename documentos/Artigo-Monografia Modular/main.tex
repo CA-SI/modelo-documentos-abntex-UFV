@@ -1,0 +1,247 @@
+%%==============================================================
+%%      Modelo de TCC para o curso de Sistemas de Informação
+%%    Universidade Federal de Viçosa - Campus de Rio Paranaíba
+%%
+%%  Autor: Rodrigo Smarzaro (smarzaro@ufv.br)
+%%         Centro Acadêmico de Sistemas de Informação
+%%  Última versão Outubro de 2019
+%%  Licença: MIT
+%%
+%%  Codificação UTF-8
+%%  Requisitos:
+%%              - pdftex
+%%              - arquivo abntex2-UFV.sty
+%%              - pygments (python pip)
+%%==============================================================
+
+% ---
+% CONFIGURAÇÕES GLOBAIS
+% ---
+
+% Configurações Especiais
+\documentclass[
+	% -- opções da classe memoir --
+	12pt, % tamanho da fonte
+	openright, % capítulos começam em pág ímpar (insere página vazia caso preciso)
+	oneside, % para impressão só no anverso. Oposto a twoside
+	a4paper, % tamanho do papel.
+  % -- opções do pacote abntex2 --
+  % chapter=TITLE, % Títulos em maiúsculas
+  sumario=tradicional, % Sumário padrão memoir (mais bonito "imo")
+  % -- opções do pacote babel --
+	english, % idioma adicional para hifenização
+	brazil, % o último idioma é o principal do documento
+]{abntex2} % Personaliza a capa. Precisa do arquivo ufv.cls para funcionar.
+
+% Pacotes Fundamentais
+\usepackage{misc/abntex2-UFV} % Personalização para a Universidade Federal de Viçosa
+\usepackage{lmodern} % Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc} % Seleção de codigos de fonte de saída
+\usepackage[utf8]{inputenc} % Codificação do documento (conversão automática dos acentos)
+\usepackage{indentfirst} % Indenta o primeiro parágrafo de cada seção
+\usepackage{graphicx} % Inclusão de gráficos
+\usepackage{booktabs} % \toprule, \midrule e \bottomrule para tabelas
+\usepackage{kantlipsum} % Gerador de texto Lorem upslum
+\usepackage{minted} % Código em LaTeX
+\usepackage[alf,abnt-emphasize=bf]{abntex2cite} % Sistema autor-data com títulos nas referências em negrito
+% ---
+
+
+% ---
+% CONFIGURAÇÕES SOBRE O TRABALHO
+% ---
+
+% Dados para Capa, Folha de Rosto e Folha de Aprovação
+\titulo{Template para Trabalhos de Conclusão de Curso da UFV}
+\autor{Rodrigo Smarzaro e CASI}
+\local{Rio Paranaíba}
+\data{2019}
+\orientador{Nome do Orientador}
+%\coorientador{Nome do Coorientador}
+\instituicao{Universidade Federal de Viçosa}
+\campus{\emph{Campus} de Rio Paranaíba}
+\curso{Sistemas de Informação}
+\membrobancaA{Membro da Banca A}
+\membrobancaB[UFMG]{Membro da Banca B}
+\databanca{\today}
+
+% Preambulo
+% Atenção deve conter o tipo do trabalho, o objetivo, o nome da instituição e a área de concentração
+\preambulo{Monografia apresentada à Universidade Federal de Viçosa como parte das exigências para a aprovação na disciplina Trabalho de Conclusão de Curso I}
+
+% Configurações de aparência do PDF final
+\makeatletter
+% Metadados
+\hypersetup{
+	pdftitle={\@title},
+	pdfauthor={\@author},
+    pdfsubject={\imprimirpreambulo},
+	 pdfcreator={LaTeX with abnTeX2},
+	colorlinks=true, % false: links em frame; true: links coloridos
+    linkcolor=black, % cor dos links no documento
+    citecolor=blue, % cor dos links para a bibliografia
+    filecolor=magenta, % cor dos links para arquivos
+	urlcolor=blue, % cor dos links para sites
+	bookmarksdepth=4 % profundidade do sumário do PDF
+}
+\makeatother
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+\begin{document}
+\frenchspacing
+\pretextual
+
+% Capa
+\imprimircapa
+
+% Folha de Rosto
+\imprimirfolhaderosto
+
+% Inserir Folha de Aprovação
+%\imprimirfolhadeaprovacao
+
+% Dedicatória
+\iffalse % Remova essa linha para descomentar
+\begin{dedicatoria}
+   \vspace*{\fill}
+   \centering
+   \noindent
+   \textit{Texto qualquer da dedicatória} % Remova essa linha, substitua pela sua dedicatória
+   \vspace*{\fill}
+\end{dedicatoria}
+\fi % Remova essa linha para descomentar
+
+% Agradecimentos
+\iffalse % Remova essa linha para descomentar
+\begin{agradecimentos}
+  \textit{Texto qualquer da dedicatória} % Remova essa linha, substitua pelo seu agradecimento
+\end{agradecimentos}
+\fi % Remova essa linha para descomentar
+
+% Epígrafe
+\iffalse % Remova essa linha para descomentar
+\begin{epigrafe}
+    \vspace*{\fill}
+  	\begin{flushright}
+		\textit{``Word? nunca mais.''\\ % Remova essa linha, substitua pela sua epígrafe
+		(Qualquer usuário de \LaTeX)} % Remova essa linha, substitua pela sua epígrafe
+	\end{flushright}
+\end{epigrafe}
+\end{agradecimentos}
+\fi % Remova essa linha para descomentar
+
+% ---
+% Resumos
+% ---
+
+% Resumo em Português
+\begin{resumo}
+  \noindent
+  \textit{Texto do seu resumo} % Remova essa linha, substitua pelo seu resumo
+  \vspace{\onelineskip}
+  \noindent
+  \textbf{Palavras-chaves}: Trabalho de Conclusão de Curso, abntex, LaTeX, UFV.
+\end{resumo}
+
+% Resumo em Inglês
+\begin{resumo}[Abstract]
+  \begin{otherlanguage*}{english}
+    \noindent
+    \textit{Abstract text} % Remova essa linha, substitua pelo seu abstract
+    \vspace{\onelineskip}
+    \noindent
+    \textbf{Key-words}: Term Paper, abntex, LaTeX, UFV.
+  \end{otherlanguage*}
+\end{resumo}
+% ---
+
+
+% Lista de Ilustrações
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+% Lista de Tabelas
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+% Lista de Siglas e Abreviaturas (opcional)
+% Sintaxe: \item [sigla] Descrição da sigla
+\iffalse % Remova essa linha para descomentar
+\begin{siglas}
+  \item[ABNT] Absurdas Normas Técnicas
+  \item[UFV] Universidade Federal de Viçosa
+  \item[CRP] \emph{Campus} de Rio Paranaíba
+\end{siglas}
+\fi % Remova essa linha para descomentar
+
+% Lista de símbolos (opcional)
+% sintaxe: \item [simbolo] Descrição do símbolo
+\iffalse % Remova essa linha para descomentar
+\begin{simbolos}
+  \item[$\infty$] Infinito
+\end{simbolos}
+\fi % Remova essa linha para descomentar
+
+% Sumario
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+
+\textual
+
+\input{1-introducao.tex}
+\input{2-referencial.tex}
+\input{3-trabalhos-relacionados.tex}
+\input{4-metodologia.tex}
+% Adicione ou tire capítulos com o seu gosto
+\input{A-cap1.tex}
+\input{5-trabalhos.tex}
+\input{6-conclusao-e-trabalhos-futuros.tex}
+% ---
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+
+\postextual
+
+% Referências Bibliográficas
+\bibliography{referencias}
+
+% Caso sejam necessários apêndices ou anexos em seu documento, use os ambientes abaixo
+
+%% Apêndices
+\iffalse % Remova essa linha para descomentar
+\begin{apendicesenv}
+  \partapendices
+  \chapter{Primeiro Apêndice}
+  \lipsum[1][1]
+  \chapter{Segundo Apêndice}
+  \lipsum[1][1]
+\end{apendicesenv}
+\fi % Remova essa linha para descomentar
+
+%% Anexos
+%\begin{anexosenv}
+\iffalse % Remova essa linha para descomentar
+  \partanexos
+  \chapter{Primeiro Anexo}
+  \lipsum[1][1]
+  \chapter{Segundo Anexo}
+  \lipsum[1][1]
+\end{anexosenv}
+\fi % Remova essa linha para descomentar
+
+\end{document}

@@ -1,0 +1,49 @@
+{
+  "devDependencies": {
+    "all-contributors-cli": "^6.9.1",
+    "archiver": "^3.1.1",
+    "del": "^5.1.0",
+    "glob": "^7.1.4",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-header": "^2.0.9",
+    "gulp-jscs": "^4.1.0",
+    "gulp-load-plugins": "^2.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-replace": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=8",
+    "npm": ">=3"
+  },
+  "orchestrator-configs": {
+    "directories": {
+      "archive": "archive",
+      "dist": "dist",
+      "src": "documentos",
+      "test": "test"
+    }
+  },
+  "homepage": "https://google.com/",
+  "license": "MIT",
+  "name": "modelo-documentos-abntex-ufv",
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp archive && mocha --require @babel/register --reporter spec --timeout 5000"
+  },
+  "version": "0.0.1",
+  "description": "Um orquestrador de distribuições de documentos AbnTex para UFV e Modelos de Documento AbnTex UFV",
+  "files": [
+    "CHANGELOG.md",
+    "LICENSE.txt",
+    "package.json",
+    "dist/",
+    "modernizr-config.json",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ca-si/modelo-documentos-abntex-UFV.git"
+  }
+}
