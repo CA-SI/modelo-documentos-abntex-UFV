@@ -1,6 +1,6 @@
 {
   "projectName": "modelo-documentos-abntex-UFV",
-  "projectOwner": "MatheusRV",
+  "projectOwner": "CA-SI",
   "repoType": "github",
   "repoHost": "https://github.com",
   "files": [
@@ -10,10 +10,10 @@
   "commit": false,
   "contributors": [
     {
-      "login": "MatheusRV",
-      "name": "Matheus Rocha Vieira",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/23284276?v=4",
-      "profile": "http://matheu.srv.br",
+      "login": "matbrgz",
+      "name": "Matheus Breguêz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23284276?v=4",
+      "profile": "https://github.com/matbrgz",
       "contributions": [
         "code",
         "design",

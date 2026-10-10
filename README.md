@@ -110,7 +110,7 @@ Para publicar uma versão, crie uma tag `vX.Y.Z`; o CI anexa os `.zip` e PDFs ao
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="http://matheu.srv.br"><img src="https://avatars0.githubusercontent.com/u/23284276?v=4" width="100px;" alt="Matheus Rocha Vieira"/><br /><sub><b>Matheus Rocha Vieira</b></sub></a><br /><a href="https://github.com/MatheusRV/modelo-documentos-abntex-UFV/commits?author=MatheusRV" title="Code">💻</a> <a href="#design-MatheusRV" title="Design">🎨</a> <a href="https://github.com/MatheusRV/modelo-documentos-abntex-UFV/commits?author=MatheusRV" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/matbrgz"><img src="https://avatars.githubusercontent.com/u/23284276?v=4" width="100px;" alt="Matheus Breguêz"/><br /><sub><b>Matheus Breguêz</b></sub></a><br /><a href="https://github.com/CA-SI/modelo-documentos-abntex-UFV/commits?author=matbrgz" title="Code">💻</a> <a href="#design-matbrgz" title="Design">🎨</a> <a href="https://github.com/CA-SI/modelo-documentos-abntex-UFV/commits?author=matbrgz" title="Documentation">📖</a></td>
   </tr>
 </table>
 
