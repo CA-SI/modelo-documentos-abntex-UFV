@@ -28,6 +28,7 @@
 %   \usepackage[abnt=2023]{misc/abntex2-UFV}
 %
 %   abnt=2023  NBR 10520:2023 + NBR 6023:2018 (biblatex-abnt, Biber) - padrão
+%              (a NBR 6023:2025 alterou tipos específicos; o estilo segue 2018)
 %   abnt=2018  NBR 10520:2002 + NBR 6023:2018 (biblatex-abnt, Biber)
 %   abnt=2002  NBR 10520:2002 + NBR 6023:2002 (abntex2cite, BibTeX)
 %
@@ -106,6 +107,13 @@
   \renewcommand*{\cftquadroaftersnum}{\hfill\textendash\hfill}%
   \providecommand*{\quadroautorefname}{Quadro}%
 }{}
+
+% NBR 14724:2024: o trabalho é organizado em seções, não em capítulos.
+% \chapter produz a seção primária; cabeçalhos e \autoref passam a dizer "Seção".
+\AtBeginDocument{%
+  \renewcommand{\chaptername}{Seção}%
+  \def\chapterautorefname{Seção}%
+}
 
 % Ajusta as margens
 \setlrmarginsandblock{3cm}{2cm}{*}

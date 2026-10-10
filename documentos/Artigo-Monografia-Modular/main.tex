@@ -12,7 +12,7 @@
 %%              - arquivo misc/abntex2-UFV.sty
 %%              - Python 3 (usado pelo pacote minted)
 %%
-%%  Cada capítulo deste guia explica uma parte do trabalho e mostra,
+%%  Cada seção primária deste guia explica uma parte do trabalho e mostra,
 %%  no próprio código, como produzi-la. Substitua o texto pelo seu.
 %%==============================================================
 
@@ -23,11 +23,11 @@
 \documentclass[
 	% -- opções da classe memoir --
 	12pt, % tamanho da fonte
-	openright, % capítulos começam em página ímpar (insere página vazia caso preciso)
+	openright, % seções primárias começam em página ímpar na impressão frente e verso
 	oneside, % impressão só no anverso; use twoside para frente e verso
 	a4paper, % tamanho do papel
 	% -- opções do pacote abntex2 --
-	% chapter=TITLE, % títulos de capítulos em maiúsculas
+	% chapter=TITLE, % títulos das seções primárias em maiúsculas
 	sumario=tradicional, % sumário padrão do memoir
 	% -- opções do pacote babel --
 	english, % idioma adicional para hifenização
@@ -166,7 +166,7 @@
 % Resumo em português
 \begin{resumo}
 	\noindent
-	Este documento é, ao mesmo tempo, um modelo e um guia para trabalhos acadêmicos da Universidade Federal de Viçosa escritos em \LaTeX\ com a classe abn\TeX2. Cada capítulo trata de uma parte do trabalho: a estrutura definida pela NBR 14724, as citações conforme a NBR 10520, as referências conforme a NBR 6023, as ilustrações e demais elementos gráficos e as ferramentas de compilação e controle de versões. O texto mostra, junto de cada regra, o comando que a produz, de modo que o leitor possa copiar o exemplo e substituí-lo pelo próprio conteúdo. As citações e as referências podem seguir as edições de 2002 ou as edições vigentes das normas, escolhidas por uma opção do pacote de estilo. O mesmo código-fonte compila nas três combinações de normas disponíveis, e o guia indica o que muda entre elas.
+	Este documento é, ao mesmo tempo, um modelo e um guia para trabalhos acadêmicos da Universidade Federal de Viçosa escritos em \LaTeX\ com a classe abn\TeX2. Cada seção primária trata de uma parte do trabalho: a estrutura definida pela NBR 14724, as citações conforme a NBR 10520, as referências conforme a NBR 6023, as ilustrações e demais elementos gráficos e as ferramentas de compilação e controle de versões. O texto mostra, junto de cada regra, o comando que a produz, de modo que o leitor possa copiar o exemplo e substituí-lo pelo próprio conteúdo. As citações e as referências podem seguir as edições de 2002 ou as edições vigentes das normas, escolhidas por uma opção do pacote de estilo. O mesmo código-fonte compila nas três combinações de normas disponíveis, e o guia indica o que muda entre elas.
 
 	\vspace{\onelineskip}
 	\noindent
@@ -177,7 +177,7 @@
 \begin{resumo}[Abstract]
 	\begin{otherlanguage*}{english}
 		\noindent
-		This document is both a template and a guide for academic works at the Federal University of Viçosa written in \LaTeX\ with the abn\TeX2 class. Each chapter covers one part of the work: the structure defined by NBR 14724, citations according to NBR 10520, references according to NBR 6023, illustrations and other graphic elements, and the tools for compiling and version control. Next to each rule, the text shows the command that produces it, so the reader can copy the example and replace it with their own content. Citations and references can follow either the 2002 editions or the current editions of the standards, selected by an option of the style package. The same source code compiles under the three available combinations of standards, and the guide explains what changes between them.
+		This document is both a template and a guide for academic works at the Federal University of Viçosa written in \LaTeX\ with the abn\TeX2 class. Each primary section covers one part of the work: the structure defined by NBR 14724, citations according to NBR 10520, references according to NBR 6023, illustrations and other graphic elements, and the tools for compiling and version control. Next to each rule, the text shows the command that produces it, so the reader can copy the example and replace it with their own content. Citations and references can follow either the 2002 editions or the current editions of the standards, selected by an option of the style package. The same source code compiles under the three available combinations of standards, and the guide explains what changes between them.
 
 		\vspace{\onelineskip}
 		\noindent
@@ -231,13 +231,13 @@
 % ----------------------------------------------------------
 \textual
 
-\input{capitulos/1-introducao}
-\input{capitulos/2-estrutura}
-\input{capitulos/3-citacoes}
-\input{capitulos/4-referencias}
-\input{capitulos/5-elementos}
-\input{capitulos/6-ferramentas}
-\input{capitulos/7-conclusao}
+\input{secoes/1-introducao}
+\input{secoes/2-estrutura}
+\input{secoes/3-citacoes}
+\input{secoes/4-referencias}
+\input{secoes/5-elementos}
+\input{secoes/6-ferramentas}
+\input{secoes/7-conclusao}
 % ---
 
 
