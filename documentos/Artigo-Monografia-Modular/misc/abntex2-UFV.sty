@@ -1,0 +1,227 @@
+%%
+%% Customizações do abnTeX2 (https://www.abntex.net.br/) para a Universidade Federal de Viçosa
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is Rodrigo Smarzaro (smarzaro@ufv.br)
+%%
+%% Further information about abnTeX2 are available on https://github.com/abntex/abntex2
+%%
+%
+% ---
+% INICIO DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA
+% ---
+\NeedsTeXFormat{LaTeX2e}[2020/10/01]
+\ProvidesPackage{abntex2-UFV}[2026/10/10 v1.0 AbnTeX2-UFV]
+
+% ---
+% VERSÃO DA ABNT PARA CITAÇÕES E REFERÊNCIAS
+%
+%   \usepackage[abnt=2023]{misc/abntex2-UFV}
+%
+%   abnt=2023  NBR 10520:2023 + NBR 6023:2018 (biblatex-abnt, Biber) - padrão
+%   abnt=2018  NBR 10520:2002 + NBR 6023:2018 (biblatex-abnt, Biber)
+%   abnt=2002  NBR 10520:2002 + NBR 6023:2002 (abntex2cite, BibTeX)
+%
+% A macro \ABNTversao, se definida antes do \documentclass (por exemplo,
+% latexmk -usepretex='\def\ABNTversao{2002}'), tem precedência sobre a opção.
+% ---
+\RequirePackage{kvoptions}
+\SetupKeyvalOptions{family=UFV,prefix=UFV@}
+\DeclareStringOption[2023]{abnt}
+\ProcessKeyvalOptions*
+
+\ifdefined\ABNTversao
+  \edef\UFV@abnt{\ABNTversao}
+\fi
+
+\def\UFV@versaoA{2002}
+\def\UFV@versaoB{2018}
+\def\UFV@versaoC{2023}
+\ifx\UFV@abnt\UFV@versaoA\else
+\ifx\UFV@abnt\UFV@versaoB\else
+\ifx\UFV@abnt\UFV@versaoC\else
+  \PackageError{abntex2-UFV}{Versão da ABNT inválida: '\UFV@abnt'}{%
+    Use abnt=2002, abnt=2018 ou abnt=2023.}
+  \let\UFV@abnt\UFV@versaoC
+\fi\fi\fi
+
+\edef\imprimirversaoabnt{\UFV@abnt}
+\PackageInfo{abntex2-UFV}{Citações e referências conforme ABNT \UFV@abnt}
+
+\ifx\UFV@abnt\UFV@versaoA
+  % NBR 10520:2002 e NBR 6023:2002
+  \RequirePackage[alf,abnt-emphasize=bf]{abntex2cite}
+  \newcommand{\arquivoreferencias}[1]{\gdef\UFV@arquivobib{#1}}
+  \newcommand{\imprimirreferencias}{\bibliography{\UFV@arquivobib}}
+\else
+  % NBR 6023:2018; citações conforme NBR 10520:2023 ou, com accite, 2002
+  \RequirePackage{csquotes}
+  \ifx\UFV@abnt\UFV@versaoB
+    \RequirePackage[style=abnt,backend=biber,accite]{biblatex}
+  \else
+    \RequirePackage[style=abnt,backend=biber]{biblatex}
+  \fi
+  \newcommand{\arquivoreferencias}[1]{\addbibresource{#1.bib}}
+  \newcommand{\imprimirreferencias}{\printbibliography[heading=bibintoc]}
+  % Comandos do abntex2cite, para o mesmo texto compilar em qualquer versão
+  \providecommand{\citeonline}{\textcite}
+  \providecommand{\apudonline}{\textapud}
+\fi
+
+% Ajusta as margens
+\setlrmarginsandblock{3cm}{2cm}{*}
+\setulmarginsandblock{3cm}{2cm}{*}
+\checkandfixthelayout
+
+% Ajusta identação do parágrafo
+\setlength{\parindent}{1.3cm}
+
+% Ajusta o espaçamento entre um parágrafo e outro
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+\providecommand{\imprimircampus}{}
+\newcommand{\campus}[1]{\renewcommand{\imprimircampus}{#1}}
+
+\providecommand{\imprimircurso}{}
+\newcommand{\curso}[1]{\renewcommand{\imprimircurso}{#1}}
+
+
+% alterando a capa
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \center
+    {\large \MakeUppercase{\imprimirinstituicao}}
+    \par
+    {\large \MakeUppercase{\imprimircampus}}
+    \par
+    \abntex@ifnotempty{\imprimircurso}{%
+       {\large \MakeUppercase{\imprimircurso}}
+    }%
+    \vspace*{3cm}
+
+    {\large \MakeUppercase{\imprimirautor}}
+
+    \vspace*{\fill}
+    {\bfseries\large \MakeUppercase{\imprimirtitulo}}
+    \vspace*{\fill}
+    \par
+    {\large\MakeUppercase{\imprimirlocal}}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{capa}
+}
+
+
+% folha de rosto
+
+
+\renewcommand{\folhaderostocontent}{
+\begin{center}
+{\large\MakeUppercase{\imprimirautor}}
+\vspace*{1cm}
+
+\vspace*{\fill}\vspace*{\fill}
+
+{\large\MakeUppercase{\imprimirtitulo}}
+
+\vspace*{\fill}
+
+\abntex@ifnotempty{\imprimirpreambulo}{%
+  \hspace{.45\textwidth}
+  \begin{minipage}{.5\textwidth}
+  \SingleSpacing
+  \imprimirpreambulo
+
+  \smallskip
+  {\imprimirorientadorRotulo~\imprimirorientador\par}
+
+  \smallskip
+  \abntex@ifnotempty{\imprimircoorientador}{%
+    {\imprimircoorientadorRotulo~\imprimircoorientador}%
+  }%
+
+  \end{minipage}%
+  \vspace*{\fill}
+}%
+    \vspace*{\fill}
+    \par
+    {\large\MakeUppercase{\imprimirlocal}}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+\end{center}
+}
+
+
+
+\providecommand{\imprimirorientadorsiglainst}{}
+\renewcommand{\orientador}[2][UFV-CRP]{\renewcommand{\imprimirorientador}{#2}\renewcommand{\imprimirorientadorsiglainst}{#1}}
+\renewcommand{\imprimirorientadorRotulo}{\orientadorname}
+
+
+\providecommand{\imprimirmembrobancaA}{}
+\providecommand{\imprimirmembrobancaAsiglainst}{}
+\newcommand{\membrobancaA}[2][UFV-CRP]{
+   \renewcommand{\imprimirmembrobancaA}{#2}
+   \renewcommand{\imprimirmembrobancaAsiglainst}{#1}
+}
+
+
+\providecommand{\imprimirmembrobancaB}{}
+\providecommand{\imprimirmembrobancaBsiglainst}{}
+\newcommand{\membrobancaB}[2][UFV-CRP]{\renewcommand{\imprimirmembrobancaB}{#2}\renewcommand{\imprimirmembrobancaBsiglainst}{#1}}
+
+\providecommand{\imprimirdatabanca}{}
+\newcommand{\databanca}[1]{\renewcommand{\imprimirdatabanca}{#1}}
+
+
+\newcommand{\imprimirfolhadeaprovacao}{
+\begin{folhadeaprovacao}
+
+  \begin{center}
+    {\large\MakeUppercase{\imprimirautor}}
+
+    \vspace*{\fill}\vspace*{\fill}
+    {\bfseries\large\MakeUppercase{\imprimirtitulo}}
+    \vspace*{\fill}
+
+    \hspace{.45\textwidth}
+    \begin{minipage}{.5\textwidth}
+        \imprimirpreambulo
+    \end{minipage}%
+    \vspace*{\fill}
+   \end{center}
+   APROVADA EM: \imprimirdatabanca
+
+   \assinatura{\textbf{\imprimirorientador} \\ Orientador \\ \imprimirorientadorsiglainst}
+
+   \abntex@ifnotempty{\imprimirmembrobancaA}{%
+   \assinatura{\textbf{\imprimirmembrobancaA} \\ \imprimirmembrobancaAsiglainst}
+   }%
+   \abntex@ifnotempty{\imprimirmembrobancaB}{%
+   \assinatura{\textbf{\imprimirmembrobancaB} \\ \imprimirmembrobancaBsiglainst}
+   }%
+   \begin{center}
+    \vspace*{\fill}
+    \par
+    {\large\MakeUppercase{\imprimirlocal}}
+    \par
+    {\large\imprimirdata}
+    \vspace*{1cm}
+  \end{center}
+\end{folhadeaprovacao}
+}
+
+% ---
+% FIM DAS CUSTOMIZACOES PARA A UNIVERSIDADE FEDERAL DE VIÇOSA
+% ---

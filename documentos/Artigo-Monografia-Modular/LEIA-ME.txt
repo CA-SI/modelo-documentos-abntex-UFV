@@ -1,0 +1,20 @@
+Modelo abnTeX2 UFV
+==================
+
+Versão da ABNT: altere a opção no main.tex
+
+    \usepackage[abnt=2023]{misc/abntex2-UFV}
+
+    abnt=2023  NBR 10520:2023 + NBR 6023:2018 (padrão)
+    abnt=2018  NBR 10520:2002 + NBR 6023:2018
+    abnt=2002  NBR 10520:2002 + NBR 6023:2002
+
+Compilar:  latexmk main.tex
+           (ou, no Overleaf: New Project > Upload Project)
+
+Ao trocar de versão, rode "latexmk -C" antes, pois as versões usam
+BibTeX (2002) ou Biber (2018 e 2023).
+
+Requisitos: TeX Live 2024 ou mais recente e Python 3 (pacote minted).
+
+Mais informações: https://github.com/CA-SI/modelo-documentos-abntex-UFV

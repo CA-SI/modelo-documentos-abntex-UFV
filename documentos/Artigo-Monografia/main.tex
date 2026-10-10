@@ -4,14 +4,14 @@
 %%
 %%  Autor: Rodrigo Smarzaro (smarzaro@ufv.br)
 %%         Centro Acadêmico de Sistemas de Informação
-%%  Última versão Outubro de 2019
+%%  Última versão Outubro de 2026
 %%  Licença: MIT
 %%
 %%  Codificação UTF-8
 %%  Requisitos:
-%%              - pdftex
-%%              - arquivo abntex2-UFV.sty
-%%              - pygments (python pip)
+%%              - TeX Live 2024 ou mais recente (pdflatex + latexmk)
+%%              - arquivo misc/abntex2-UFV.sty
+%%              - Python 3 (usado pelo pacote minted)
 %%==============================================================
 
 % ---
@@ -31,18 +31,26 @@
   % -- opções do pacote babel --
 	english, % idioma adicional para hifenização
 	brazil, % o último idioma é o principal do documento
-]{abntex2} % Personaliza a capa. Precisa do arquivo ufv.cls para funcionar.
+]{abntex2}
 
 % Pacotes Fundamentais
-\usepackage{misc/abntex2-UFV} % Personalização para a Universidade Federal de Viçosa
+% Personalização para a Universidade Federal de Viçosa.
+% Versão da ABNT para citações e referências:
+%   abnt=2023 -> NBR 10520:2023 + NBR 6023:2018 (padrão)
+%   abnt=2018 -> NBR 10520:2002 + NBR 6023:2018
+%   abnt=2002 -> NBR 10520:2002 + NBR 6023:2002
+\usepackage[abnt=2023]{misc/abntex2-UFV}
 \usepackage{lmodern} % Usa a fonte Latin Modern			
 \usepackage[T1]{fontenc} % Seleção de codigos de fonte de saída
 \usepackage[utf8]{inputenc} % Codificação do documento (conversão automática dos acentos)
 \usepackage{indentfirst} % Indenta o primeiro parágrafo de cada seção
 \usepackage{graphicx} % Inclusão de gráficos
 \usepackage{booktabs} % \toprule, \midrule e \bottomrule para tabelas
-\usepackage{kantlipsum} % Gerador de texto Lorem upslum
-\usepackage[alf,abnt-emphasize=bf]{abntex2cite} % Sistema autor-data com títulos nas referências em negrito
+\usepackage{lipsum} % Gerador de texto Lorem ipsum
+\usepackage{minted} % Código em LaTeX
+
+% Arquivo de referências (sem a extensão .bib)
+\arquivoreferencias{referencias}
 % ---
 
 
@@ -54,7 +62,7 @@
 \titulo{Template para Trabalhos de Conclusão de Curso da UFV}
 \autor{Rodrigo Smarzaro e CASI}
 \local{Rio Paranaíba}
-\data{2019}
+\data{2026}
 \orientador{Nome do Orientador}
 %\coorientador{Nome do Coorientador}
 \instituicao{Universidade Federal de Viçosa}
@@ -116,7 +124,7 @@
 % Agradecimentos
 \iffalse % Remova essa linha para descomentar
 \begin{agradecimentos}
-  \textit{Texto qualquer da dedicatória} % Remova essa linha, substitua pelo seu agradecimento
+  \textit{Texto qualquer dos agradecimentos} % Remova essa linha, substitua pelo seu agradecimento
 \end{agradecimentos}
 \fi % Remova essa linha para descomentar
 
@@ -129,7 +137,6 @@
 		(Qualquer usuário de \LaTeX)} % Remova essa linha, substitua pela sua epígrafe
 	\end{flushright}
 \end{epigrafe}
-\end{agradecimentos}
 \fi % Remova essa linha para descomentar
 
 % ---
@@ -142,7 +149,7 @@
   \textit{Texto do seu resumo} % Remova essa linha, substitua pelo seu resumo
   \vspace{\onelineskip}
   \noindent
-  \textbf{Palavras-chaves}: Trabalho de Conclusão de Curso, abntex, LaTeX, UFV.
+  \textbf{Palavras-chave}: Trabalho de Conclusão de Curso; abnTeX; LaTeX; UFV.
 \end{resumo}
 
 % Resumo em Inglês
@@ -152,7 +159,7 @@
     \textit{Abstract text} % Remova essa linha, substitua pelo seu abstract
     \vspace{\onelineskip}
     \noindent
-    \textbf{Key-words}: Term Paper, abntex, LaTeX, UFV.
+    \textbf{Keywords}: Term Paper; abnTeX; LaTeX; UFV.
   \end{otherlanguage*}
 \end{resumo}
 % ---
@@ -172,7 +179,7 @@
 % Sintaxe: \item [sigla] Descrição da sigla
 \iffalse % Remova essa linha para descomentar
 \begin{siglas}
-  \item[ABNT] Absurdas Normas Técnicas
+  \item[ABNT] Associação Brasileira de Normas Técnicas
   \item[UFV] Universidade Federal de Viçosa
   \item[CRP] \emph{Campus} de Rio Paranaíba
 \end{siglas}
@@ -222,7 +229,7 @@ Alguns links interessantes para se trabalhar com a classe abn\TeX\ e \LaTeX\ em 
 \end{itemize}
 
 \chapter{Referencial Teórico}\label{sec:RefTeorico}
-Exemplo de utiliação de imagem em \LaTeX
+Exemplo de utilização de imagem em \LaTeX
 \begin{figure}[htbp]
     \begin{center}
     \includegraphics[width=.5\linewidth]{assets/LogoUFV}\\
@@ -263,7 +270,7 @@ def incmatrix(genl1,genl2):
 \chapter{Trabalhos Relacionados}\label{sec:TrabRel}
 \lipsum[1][1]
 
-\chapter{Medodologia e Cronograma}\label{sec:metodos}
+\chapter{Metodologia e Cronograma}\label{sec:metodos}
 
 O abn\TeX\ introduziu o comando \texttt{IBGEtab} para formatação de tabelas. Um exemplo de tabela convencional do \LaTeX\ pode ser observado na \autoref{tab:cronograma} enquanto um exemplo usando o \texttt{IBGEtab} é mostrado na Tabela \ref{tab:cronogramaIBGE}.
 
@@ -318,8 +325,8 @@ O abn\TeX\ introduziu o comando \texttt{IBGEtab} para formatação de tabelas. U
 
 \postextual
 
-% Referências Bibliográficas
-\bibliography{referencias}
+% Referências
+\imprimirreferencias
 
 % Caso sejam necessários apêndices ou anexos em seu documento, use os ambientes abaixo
 
@@ -336,8 +343,8 @@ O abn\TeX\ introduziu o comando \texttt{IBGEtab} para formatação de tabelas. U
 \fi % Remova essa linha para descomentar
 
 %% Anexos
-%\begin{anexosenv}
 \iffalse % Remova essa linha para descomentar
+\begin{anexosenv}
   \partanexos
 
   \chapter{Primeiro Anexo}
