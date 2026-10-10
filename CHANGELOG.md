@@ -16,6 +16,8 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 - Letras de desambiguação do ano (1984a, 1984b) também na lista de referências
   nas versões 2018 e 2023 (opção `extradate` do biblatex-abnt).
 - Título da lista de referências fixado em "Referências" nas versões com biblatex.
+- `uniquelist=false` no biblatex: "(Wilson et al., 2014)" em vez de "(Wilson; Aruliah et al., 2014)"
+  quando há obras do mesmo primeiro autor com coautores diferentes.
 - Entidades autoras em maiúsculas no `.bib`, para a versão 2002 mantê-las na citação.
 - Créditos do repositório atualizados para Matheus Breguêz (matbrgz); `.mailmap` adicionado.
 - Actions do CI fixadas por SHA; permissão de escrita só no job de release.
