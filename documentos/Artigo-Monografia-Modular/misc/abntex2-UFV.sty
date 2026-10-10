@@ -80,13 +80,31 @@
 % Quadro: ilustração com informação textual (NBR 14724).
 % Uso: \begin{quadro} \caption{...} ... \fonte{...} \end{quadro}
 % Lista: \listofquadros*
+% Definido como o \newfloat do memoir, sem chamá-lo: o pacote float (carregado
+% por minted, algorithm etc.) substitui \newfloat por outro com outra sintaxe.
 \@ifundefined{quadro}{%
-  \newfloat{quadro}{loq}{Quadro}
-  \newlistof{listofquadros}{loq}{Lista de quadros}
-  \newlistentry{quadro}{loq}{0}
-  \renewcommand*{\cftquadroname}{Quadro\space}
-  \renewcommand*{\cftquadroaftersnum}{\hfill\textendash\hfill}
-  \providecommand*{\quadroautorefname}{Quadro}
+  % tipo de flutuante (potência de 2) livre também para o pacote float
+  \@ifundefined{c@float@type}{}{%
+    \ifnum\value{float@type}>\value{newflo@tctr}%
+      \setcounter{newflo@tctr}{\value{float@type}}\fi}%
+  \expandafter\edef\csname ftype@quadro\endcsname{\the\c@newflo@tctr}%
+  \advance\c@newflo@tctr \c@newflo@tctr
+  \@ifundefined{c@float@type}{}{\setcounter{float@type}{\value{newflo@tctr}}}%
+  \newcounter{quadro}%
+  \@namedef{ext@quadro}{loq}%
+  \@ifundefined{c@loqdepth}{\newcounter{loqdepth}}{}%
+  \setcounter{loqdepth}{1}%
+  \@namedef{fps@quadro}{tbp}%
+  \@namedef{fnum@quadro}{Quadro~\thequadro}%
+  \@namedef{flegquadro}{Quadro}%
+  \@namedef{flegtocquadro}#1{}%
+  \newenvironment{quadro}{\@float{quadro}}{\end@float}%
+  \newenvironment{quadro*}{\@dblfloat{quadro}}{\end@dblfloat}%
+  \newlistof{listofquadros}{loq}{Lista de quadros}%
+  \newlistentry{quadro}{loq}{0}%
+  \renewcommand*{\cftquadroname}{Quadro\space}%
+  \renewcommand*{\cftquadroaftersnum}{\hfill\textendash\hfill}%
+  \providecommand*{\quadroautorefname}{Quadro}%
 }{}
 
 % Ajusta as margens

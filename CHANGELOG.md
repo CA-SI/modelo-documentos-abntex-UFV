@@ -12,6 +12,10 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 - Ambiente `quadro` e lista de quadros no pacote `abntex2-UFV`.
 - `make gerar-unico`: o modelo de arquivo único é gerado a partir do modular (`latexpand`).
 
+### Corrigido
+- Quadro saía como "quadro 1:" com legenda fora do padrão quando o pacote `float`
+  (carregado por `minted` e `algorithm`) vinha antes do `abntex2-UFV`.
+
 ### Alterado
 - Letras de desambiguação do ano (1984a, 1984b) também na lista de referências
   nas versões 2018 e 2023 (opção `extradate` do biblatex-abnt).
