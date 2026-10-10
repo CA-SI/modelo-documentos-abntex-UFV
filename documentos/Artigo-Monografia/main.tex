@@ -1,10 +1,11 @@
+%% ARQUIVO GERADO por `make gerar-unico` a partir de documentos/Artigo-Monografia-Modular/.
+%% Para alterar o guia, edite o modelo modular e regenere este arquivo.
 %%==============================================================
-%%      Modelo de TCC para o curso de Sistemas de Informação
+%%   Guia e modelo de trabalho acadêmico abnTeX2 para a UFV
 %%    Universidade Federal de Viçosa - Campus de Rio Paranaíba
 %%
-%%  Autor: Rodrigo Smarzaro (smarzaro@ufv.br)
-%%         Centro Acadêmico de Sistemas de Informação
-%%  Última versão Outubro de 2026
+%%  Modelo original: Rodrigo Smarzaro (smarzaro@ufv.br) e
+%%                   Centro Acadêmico de Sistemas de Informação
 %%  Licença: MIT
 %%
 %%  Codificação UTF-8
@@ -12,42 +13,62 @@
 %%              - TeX Live 2024 ou mais recente (pdflatex + latexmk)
 %%              - arquivo misc/abntex2-UFV.sty
 %%              - Python 3 (usado pelo pacote minted)
+%%
+%%  Cada capítulo deste guia explica uma parte do trabalho e mostra,
+%%  no próprio código, como produzi-la. Substitua o texto pelo seu.
 %%==============================================================
 
 % ---
 % CONFIGURAÇÕES GLOBAIS
 % ---
 
-% Configurações Especiais
 \documentclass[
 	% -- opções da classe memoir --
 	12pt, % tamanho da fonte
-	openright, % capítulos começam em pág ímpar (insere página vazia caso preciso)
-	oneside, % para impressão só no anverso. Oposto a twoside
-	a4paper, % tamanho do papel.
-  % -- opções do pacote abntex2 --
-  % chapter=TITLE, % Títulos em maiúsculas
-  sumario=tradicional, % Sumário padrão memoir (mais bonito "imo")
-  % -- opções do pacote babel --
+	openright, % capítulos começam em página ímpar (insere página vazia caso preciso)
+	oneside, % impressão só no anverso; use twoside para frente e verso
+	a4paper, % tamanho do papel
+	% -- opções do pacote abntex2 --
+	% chapter=TITLE, % títulos de capítulos em maiúsculas
+	sumario=tradicional, % sumário padrão do memoir
+	% -- opções do pacote babel --
 	english, % idioma adicional para hifenização
 	brazil, % o último idioma é o principal do documento
 ]{abntex2}
 
-% Pacotes Fundamentais
-% Personalização para a Universidade Federal de Viçosa.
+% Pacotes fundamentais
+\usepackage{lmodern} % fonte Latin Modern
+\usepackage[T1]{fontenc} % codificação de fonte de saída
+\usepackage[utf8]{inputenc} % codificação do documento
+\usepackage{indentfirst} % indenta o primeiro parágrafo de cada seção
+\usepackage{graphicx} % inclusão de imagens
+\usepackage{booktabs} % \toprule, \midrule e \bottomrule em tabelas
+\usepackage{lipsum} % texto de preenchimento
+\usepackage{amsmath,amssymb} % equações
+\usepackage[output-decimal-marker={,}]{siunitx} % números e unidades (vírgula decimal)
+\usepackage{subcaption} % subfiguras
+\usepackage{algorithm} % ambiente de algoritmo
+\usepackage{algpseudocode} % pseudocódigo
+\usepackage{minted} % código-fonte com realce de sintaxe
+
+% Personalização para a Universidade Federal de Viçosa (carregar por último).
 % Versão da ABNT para citações e referências:
 %   abnt=2023 -> NBR 10520:2023 + NBR 6023:2018 (padrão)
 %   abnt=2018 -> NBR 10520:2002 + NBR 6023:2018
 %   abnt=2002 -> NBR 10520:2002 + NBR 6023:2002
 \usepackage[abnt=2023]{misc/abntex2-UFV}
-\usepackage{lmodern} % Usa a fonte Latin Modern			
-\usepackage[T1]{fontenc} % Seleção de codigos de fonte de saída
-\usepackage[utf8]{inputenc} % Codificação do documento (conversão automática dos acentos)
-\usepackage{indentfirst} % Indenta o primeiro parágrafo de cada seção
-\usepackage{graphicx} % Inclusão de gráficos
-\usepackage{booktabs} % \toprule, \midrule e \bottomrule para tabelas
-\usepackage{lipsum} % Gerador de texto Lorem ipsum
-\usepackage{minted} % Código em LaTeX
+
+% Evita linhas que ultrapassam a margem (comuns com comandos em fonte monoespaçada)
+\setlength{\emergencystretch}{3em}
+
+% Nomes em português para algoritmos
+\floatname{algorithm}{Algoritmo}
+\newcommand{\algorithmautorefname}{Algoritmo}
+\algrenewcommand\algorithmicwhile{\textbf{enquanto}}
+\algrenewcommand\algorithmicdo{\textbf{faça}}
+\algrenewcommand\algorithmicreturn{\textbf{retorne}}
+\algrenewcommand\algorithmicfunction{\textbf{função}}
+\algrenewcommand\algorithmicend{\textbf{fim}}
 
 % Arquivo de referências (sem a extensão .bib)
 \arquivoreferencias{referencias}
@@ -58,9 +79,9 @@
 % CONFIGURAÇÕES SOBRE O TRABALHO
 % ---
 
-% Dados para Capa, Folha de Rosto e Folha de Aprovação
-\titulo{Template para Trabalhos de Conclusão de Curso da UFV}
-\autor{Rodrigo Smarzaro e CASI}
+% Dados para capa, folha de rosto e folha de aprovação
+\titulo{Guia para Trabalhos Acadêmicos da UFV com abn\TeX2}
+\autor{Nome do Autor}
 \local{Rio Paranaíba}
 \data{2026}
 \orientador{Nome do Orientador}
@@ -72,27 +93,26 @@
 \membrobancaB[UFMG]{Membro da Banca B}
 \databanca{\today}
 
-% Preambulo
-% Atenção deve conter o tipo do trabalho, o objetivo, o nome da instituição e a área de concentração
-\preambulo{Monografia apresentada à Universidade Federal de Viçosa como parte das exigências para a aprovação na disciplina Trabalho de Conclusão de Curso I}
+% Preâmbulo: tipo do trabalho, objetivo, instituição e área de concentração
+\preambulo{Monografia apresentada à Universidade Federal de Viçosa como parte das exigências para a aprovação na disciplina Trabalho de Conclusão de Curso I.}
 
-% Configurações de aparência do PDF final
+% Metadados e aparência dos links do PDF
 \makeatletter
-% Metadados
 \hypersetup{
 	pdftitle={\@title},
 	pdfauthor={\@author},
-    pdfsubject={\imprimirpreambulo},
-	 pdfcreator={LaTeX with abnTeX2},
-	colorlinks=true, % false: links em frame; true: links coloridos
-    linkcolor=black, % cor dos links no documento
-    citecolor=blue, % cor dos links para a bibliografia
-    filecolor=magenta, % cor dos links para arquivos
-	urlcolor=blue, % cor dos links para sites
+	pdfsubject={\imprimirpreambulo},
+	pdfcreator={LaTeX with abnTeX2},
+	colorlinks=true, % false: links em caixa; true: links coloridos
+	linkcolor=black, % links internos
+	citecolor=blue, % links para as referências
+	filecolor=magenta, % links para arquivos
+	urlcolor=blue, % links para sites
 	bookmarksdepth=4 % profundidade do sumário do PDF
 }
 \makeatother
 % ---
+
 
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
@@ -101,99 +121,107 @@
 \frenchspacing
 \pretextual
 
-% Capa
+% Capa (obrigatório)
 \imprimircapa
 
-% Folha de Rosto
+% Folha de rosto (obrigatório)
 \imprimirfolhaderosto
 
-% Inserir Folha de Aprovação
+% Folha de aprovação (obrigatório na versão final, após a defesa)
 %\imprimirfolhadeaprovacao
 
-% Dedicatória
-\iffalse % Remova essa linha para descomentar
+% Dedicatória (opcional)
+\iffalse % Remova esta linha para usar
 \begin{dedicatoria}
-   \vspace*{\fill}
-   \centering
-   \noindent
-   \textit{Texto qualquer da dedicatória} % Remova essa linha, substitua pela sua dedicatória
-   \vspace*{\fill}
+	\vspace*{\fill}
+	\centering
+	\noindent
+	\textit{Texto da dedicatória.}
+	\vspace*{\fill}
 \end{dedicatoria}
-\fi % Remova essa linha para descomentar
+\fi % Remova esta linha para usar
 
-% Agradecimentos
-\iffalse % Remova essa linha para descomentar
+% Agradecimentos (opcional)
+\iffalse % Remova esta linha para usar
 \begin{agradecimentos}
-  \textit{Texto qualquer dos agradecimentos} % Remova essa linha, substitua pelo seu agradecimento
+	Texto dos agradecimentos.
 \end{agradecimentos}
-\fi % Remova essa linha para descomentar
+\fi % Remova esta linha para usar
 
-% Epígrafe
-\iffalse % Remova essa linha para descomentar
+% Epígrafe (opcional)
+\iffalse % Remova esta linha para usar
 \begin{epigrafe}
-    \vspace*{\fill}
-  	\begin{flushright}
-		\textit{``Word? nunca mais.''\\ % Remova essa linha, substitua pela sua epígrafe
-		(Qualquer usuário de \LaTeX)} % Remova essa linha, substitua pela sua epígrafe
+	\vspace*{\fill}
+	\begin{flushright}
+		\textit{``Texto da epígrafe.''\\
+		(Autor da epígrafe)}
 	\end{flushright}
 \end{epigrafe}
-\fi % Remova essa linha para descomentar
+\fi % Remova esta linha para usar
 
 % ---
-% Resumos
+% Resumos (obrigatórios). NBR 6028: parágrafo único, de 150 a 500
+% palavras; palavras-chave separadas por ponto e vírgula e finalizadas
+% por ponto.
 % ---
 
-% Resumo em Português
+% Resumo em português
 \begin{resumo}
-  \noindent
-  \textit{Texto do seu resumo} % Remova essa linha, substitua pelo seu resumo
-  \vspace{\onelineskip}
-  \noindent
-  \textbf{Palavras-chave}: Trabalho de Conclusão de Curso; abnTeX; LaTeX; UFV.
+	\noindent
+	Este documento é, ao mesmo tempo, um modelo e um guia para trabalhos acadêmicos da Universidade Federal de Viçosa escritos em \LaTeX\ com a classe abn\TeX2. Cada capítulo trata de uma parte do trabalho: a estrutura definida pela NBR 14724, as citações conforme a NBR 10520, as referências conforme a NBR 6023, as ilustrações e demais elementos gráficos e as ferramentas de compilação e controle de versões. O texto mostra, junto de cada regra, o comando que a produz, de modo que o leitor possa copiar o exemplo e substituí-lo pelo próprio conteúdo. As citações e as referências podem seguir as edições de 2002 ou as edições vigentes das normas, escolhidas por uma opção do pacote de estilo. O mesmo código-fonte compila nas três combinações de normas disponíveis, e o guia indica o que muda entre elas.
+
+	\vspace{\onelineskip}
+	\noindent
+	\textbf{Palavras-chave}: trabalho acadêmico; ABNT; abn\TeX2; \LaTeX; UFV.
 \end{resumo}
 
-% Resumo em Inglês
+% Resumo em língua estrangeira
 \begin{resumo}[Abstract]
-  \begin{otherlanguage*}{english}
-    \noindent
-    \textit{Abstract text} % Remova essa linha, substitua pelo seu abstract
-    \vspace{\onelineskip}
-    \noindent
-    \textbf{Keywords}: Term Paper; abnTeX; LaTeX; UFV.
-  \end{otherlanguage*}
+	\begin{otherlanguage*}{english}
+		\noindent
+		This document is both a template and a guide for academic works at the Federal University of Viçosa written in \LaTeX\ with the abn\TeX2 class. Each chapter covers one part of the work: the structure defined by NBR 14724, citations according to NBR 10520, references according to NBR 6023, illustrations and other graphic elements, and the tools for compiling and version control. Next to each rule, the text shows the command that produces it, so the reader can copy the example and replace it with their own content. Citations and references can follow either the 2002 editions or the current editions of the standards, selected by an option of the style package. The same source code compiles under the three available combinations of standards, and the guide explains what changes between them.
+
+		\vspace{\onelineskip}
+		\noindent
+		\textbf{Keywords}: academic work; ABNT; abn\TeX2; \LaTeX; UFV.
+	\end{otherlanguage*}
 \end{resumo}
-% ---
 
-
-% Lista de Ilustrações
+% Lista de ilustrações (opcional)
 \pdfbookmark[0]{\listfigurename}{lof}
 \listoffigures*
 \cleardoublepage
 
-% Lista de Tabelas
+% Lista de quadros (opcional)
+\pdfbookmark[0]{Lista de quadros}{loq}
+\listofquadros*
+\cleardoublepage
+
+% Lista de tabelas (opcional)
 \pdfbookmark[0]{\listtablename}{lot}
 \listoftables*
 \cleardoublepage
 
-% Lista de Siglas e Abreviaturas (opcional)
-% Sintaxe: \item [sigla] Descrição da sigla
-\iffalse % Remova essa linha para descomentar
+% Lista de abreviaturas e siglas (opcional)
 \begin{siglas}
-  \item[ABNT] Associação Brasileira de Normas Técnicas
-  \item[UFV] Universidade Federal de Viçosa
-  \item[CRP] \emph{Campus} de Rio Paranaíba
+	\item[ABNT] Associação Brasileira de Normas Técnicas
+	\item[CTAN] Comprehensive \TeX\ Archive Network
+	\item[DOI] \textit{Digital Object Identifier}
+	\item[IBGE] Instituto Brasileiro de Geografia e Estatística
+	\item[NBR] Norma Brasileira
+	\item[TCC] Trabalho de Conclusão de Curso
+	\item[UFV] Universidade Federal de Viçosa
 \end{siglas}
-\fi % Remova essa linha para descomentar
 
 % Lista de símbolos (opcional)
-% sintaxe: \item [simbolo] Descrição do símbolo
-\iffalse % Remova essa linha para descomentar
 \begin{simbolos}
-  \item[$\infty$] Infinito
+	\item[$\bar{x}$] Média aritmética
+	\item[$s$] Desvio padrão amostral
+	\item[$n$] Tamanho da amostra
+	\item[$\sum$] Somatório
 \end{simbolos}
-\fi % Remova essa linha para descomentar
 
-% Sumario
+% Sumário (obrigatório)
 \pdfbookmark[0]{\contentsname}{toc}
 \tableofcontents*
 \cleardoublepage
@@ -203,155 +231,675 @@
 % ----------------------------------------------------------
 % ELEMENTOS TEXTUAIS
 % ----------------------------------------------------------
-
 \textual
 
-% Modifique a estrutura dos capítulos e seções de acordo com a necessidade do seu trabalho
-\chapter{Introdução}\label{sec:introducao}
-Alguns links interessantes para se trabalhar com a classe abn\TeX\ e \LaTeX\ em geral\footnote{E também para usar alguns comandos de citação como exemplo}:
+% ----------------------------------------------------------
+% Capítulo 1 — Introdução
+% Na introdução do seu trabalho, apresente o tema, o problema,
+% a justificativa, os objetivos e a organização do texto.
+% ----------------------------------------------------------
+\chapter{Introdução}\label{cap:introducao}
+
+Este documento é um guia e, ao mesmo tempo, o modelo que ele descreve. Cada capítulo explica uma parte do trabalho acadêmico e demonstra, no próprio código-fonte, como produzi-la com a classe abn\TeX2 \cite{abntex2classe}, que estende a classe \textit{memoir} \cite{memoir} para atender às normas da Associação Brasileira de Normas Técnicas (ABNT). Para escrever o seu trabalho, abra o arquivo \texttt{.tex} correspondente a cada capítulo, leia a explicação e substitua o texto pelo seu.
+
+O \LaTeX\ é um sistema de preparação de documentos construído sobre o \TeX\ \cite{knuth1984texbook}. Nele, o autor descreve a estrutura do texto (capítulos, seções, citações, figuras) e o sistema cuida da formatação \cite{lamport1994}. Em trabalhos acadêmicos, isso significa que numeração de seções, sumário, listas de ilustrações, citações e referências são gerados automaticamente e permanecem consistentes a cada alteração. Para aprofundar o estudo do \LaTeX, consulte \citeonline{mittelbach2004} e \citeonline{dongen2012}.
+
+\section{Como usar este guia}\label{sec:como-usar}
+
+O modelo está organizado em arquivos separados:
+
 \begin{alineas}
-  \item Informações da classe Abn\TeX : \citeonline{abntex2classe}
-  \item Ajustes nas citações e referências: \citeonline{abntex2cite} e \citeonline{abntex2cite-alf}
-  \item Classe memoir (base do Abn\TeX\ ): \apudonline{memoir}{abntex2classe}
-  \item Livros interessantes sobre \LaTeX: \cite{Dongen2012,LeslieLamport90,FrankMittelbach111,Dongen2012}
-  \item Distribuição \LaTeX\ para windows: \url{http://miktex.org/}
-  \item Editor \LaTeX\ gratuito: \url{http://texstudio.sourceforge.net/}
-  \item Gerenciador de arquivos \texttt{.bib}: \url{http://jabref.sourceforge.net/}
-  \item Gerenciador de artigos: \url{http://www.mendeley.com/}
-  \item Exemplo de Tabela: Veja \autoref{tab:cronograma}
+	\item \texttt{main.tex}: preâmbulo, dados do trabalho (título, autor, orientador), elementos pré-textuais e a ordem dos capítulos;
+	\item \texttt{capitulos/}: um arquivo por capítulo;
+	\item \texttt{pos-textuais/}: apêndices e anexos;
+	\item \texttt{referencias.bib}: base de referências bibliográficas;
+	\item \texttt{assets/}: imagens;
+	\item \texttt{misc/abntex2-UFV.sty}: pacote com a capa, a folha de rosto e a folha de aprovação da UFV.
 \end{alineas}
 
-\section{Objetivo Geral}
+Para acrescentar um capítulo, crie um arquivo em \texttt{capitulos/} e inclua-o no \texttt{main.tex} com o comando \verb|\input|. A compilação está descrita no \autoref{cap:ferramentas}.
 
-\section{Objetivos Específicos}
-\begin{itemize}
-    \item 
-\end{itemize}
+\section{Escolha da versão da ABNT}\label{sec:versao-abnt}
 
-\chapter{Referencial Teórico}\label{sec:RefTeorico}
-Exemplo de utilização de imagem em \LaTeX
-\begin{figure}[htbp]
-    \begin{center}
-    \includegraphics[width=.5\linewidth]{assets/LogoUFV}\\
-    \end{center}
-    \caption[Exemplo de Figura]{Exemplo de inserção de figura no \LaTeX. A legenda deve vir abaixo da figura. Pode usar o comando \texttt{\textbackslash legend} ou \texttt{\textbackslash fonte} para inserir a fonte da figura. Observe que na lista de ilustrações foi utilizado o nome curto fornecido como parâmetro do caption da figura (veja o arquivo fonte .tex) ao invés dessa legenda estupidamente extensa feita de forma proposital}
-    \label{fig:logo}
-    \legend{Fonte: Próprio Autor}
-  \end{figure}
+As normas de citação (NBR 10520) e de referências (NBR 6023) foram revistas, e alguns cursos ainda adotam as edições anteriores. Por isso, o pacote \texttt{abntex2-UFV} aceita a opção \texttt{abnt}, definida no \texttt{main.tex}:
 
-Exemplo de utilização de Código
-\begin{minted}{python}
-import numpy as np
-
-def incmatrix(genl1,genl2):
-    m = len(genl1)
-    n = len(genl2)
-    M = None #to become the incidence matrix
-    VT = np.zeros((n*m,1), int)  #dummy variable
-    #compute the bitwise xor matrix
-    M1 = bitxormatrix(genl1)
-    M2 = np.triu(bitxormatrix(genl2),1) 
-    for i in range(m-1):
-        for j in range(i+1, m):
-            [r,c] = np.where(M2 == M1[i,j])
-            for k in range(len(r)):
-                VT[(i)*n + r[k]] = 1;
-                VT[(i)*n + c[k]] = 1;
-                VT[(j)*n + r[k]] = 1;
-                VT[(j)*n + c[k]] = 1;
-                if M is None:
-                    M = np.copy(VT)
-                else:
-                    M = np.concatenate((M, VT), 1)
-                VT = np.zeros((n*m,1), int)
-    return M
+\begin{minted}{latex}
+\usepackage[abnt=2023]{misc/abntex2-UFV}  % ou abnt=2018, abnt=2002
 \end{minted}
 
-\chapter{Trabalhos Relacionados}\label{sec:TrabRel}
-\lipsum[1][1]
+O \autoref{qua:versoes-abnt} resume cada opção. Este documento foi compilado com a opção \texttt{abnt=\imprimirversaoabnt}. Antes de escolher, confirme com o orientador ou com o regulamento do curso qual edição deve ser seguida.
 
-\chapter{Metodologia e Cronograma}\label{sec:metodos}
+\begin{quadro}[htbp]
+	\caption{Versões da ABNT disponíveis no modelo}\label{qua:versoes-abnt}
+	\centering
+	\begin{tabular}{p{0.15\textwidth}p{0.32\textwidth}p{0.35\textwidth}}
+		\toprule
+		\textbf{Opção} & \textbf{Citações} & \textbf{Referências} \\
+		\midrule
+		\texttt{2023} & NBR 10520:2023 \cite{abnt10520}: autor em maiúsculas e minúsculas & NBR 6023:2018 \cite{abnt6023} \\
+		\texttt{2018} & NBR 10520:2002 \cite{abnt10520-2002}: autor em maiúsculas & NBR 6023:2018 \\
+		\texttt{2002} & NBR 10520:2002: autor em maiúsculas & NBR 6023:2002 \cite{abnt6023-2002} \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Elaborado pelo autor.}
+\end{quadro}
 
-O abn\TeX\ introduziu o comando \texttt{IBGEtab} para formatação de tabelas. Um exemplo de tabela convencional do \LaTeX\ pode ser observado na \autoref{tab:cronograma} enquanto um exemplo usando o \texttt{IBGEtab} é mostrado na Tabela \ref{tab:cronogramaIBGE}.
+\section{Objetivos}\label{sec:objetivos}
+
+Em um trabalho acadêmico, esta seção apresenta o objetivo geral e os objetivos específicos. Os objetivos começam com verbo no infinitivo e devem ser verificáveis ao final do trabalho. Para planejar a pesquisa e redigir os objetivos, consulte \citeonline{gil2017} e \citeonline{marconi2017}.
+
+\subsection{Objetivo geral}\label{sec:objetivo-geral}
+
+Orientar a escrita de trabalhos acadêmicos da UFV em \LaTeX, conforme as normas da ABNT.
+
+\subsection{Objetivos específicos}\label{sec:objetivos-especificos}
+
+\begin{alineas}
+	\item apresentar a estrutura do trabalho acadêmico e suas regras de formatação;
+	\item demonstrar os tipos de citação e a elaboração de referências;
+	\item demonstrar a inserção de ilustrações, tabelas, equações, algoritmos e código-fonte;
+	\item descrever um fluxo de trabalho para compilar e versionar o documento.
+\end{alineas}
+
+\section{Organização do texto}\label{sec:organizacao}
+
+O \autoref{cap:estrutura} apresenta a estrutura do trabalho acadêmico. O \autoref{cap:citacoes} trata das citações e o \autoref{cap:referencias}, das referências. O \autoref{cap:elementos} demonstra ilustrações, tabelas e demais elementos. O \autoref{cap:ferramentas} descreve as ferramentas de trabalho, e o \autoref{cap:conclusao} apresenta as considerações finais.
+ % ----------------------------------------------------------
+% Capítulo 2 — Estrutura do trabalho acadêmico (NBR 14724)
+% ----------------------------------------------------------
+\chapter{Estrutura do Trabalho Acadêmico}\label{cap:estrutura}
+
+A NBR 14724 \cite{abnt14724} define a estrutura dos trabalhos acadêmicos (teses, dissertações e trabalhos de conclusão de curso) em três partes: elementos pré-textuais, textuais e pós-textuais. O \autoref{qua:estrutura} lista os elementos na ordem em que aparecem e indica quais são obrigatórios.
+
+\begin{quadro}[htbp]
+	\caption{Elementos do trabalho acadêmico}\label{qua:estrutura}
+	\centering
+	\footnotesize
+	\begin{tabular}{p{0.12\textwidth}p{0.33\textwidth}p{0.13\textwidth}p{0.30\textwidth}}
+		\toprule
+		\textbf{Parte} & \textbf{Elemento} & \textbf{Uso} & \textbf{Comando} \\
+		\midrule
+		Externa & Capa & obrigatório & \verb|\imprimircapa| \\
+		& Lombada & opcional & --- \\
+		\midrule
+		Pré-textual & Folha de rosto & obrigatório & \verb|\imprimirfolhaderosto| \\
+		& Errata & opcional & \texttt{errata} \\
+		& Folha de aprovação & obrigatório & \verb|\imprimirfolhadeaprovacao| \\
+		& Dedicatória & opcional & \texttt{dedicatoria} \\
+		& Agradecimentos & opcional & \texttt{agradecimentos} \\
+		& Epígrafe & opcional & \texttt{epigrafe} \\
+		& Resumo na língua vernácula & obrigatório & \texttt{resumo} \\
+		& Resumo em língua estrangeira & obrigatório & \texttt{resumo} \\
+		& Lista de ilustrações & opcional & \verb|\listoffigures*| \\
+		& Lista de tabelas & opcional & \verb|\listoftables*| \\
+		& Lista de abreviaturas e siglas & opcional & \texttt{siglas} \\
+		& Lista de símbolos & opcional & \texttt{simbolos} \\
+		& Sumário & obrigatório & \verb|\tableofcontents*| \\
+		\midrule
+		Textual & Introdução, desenvolvimento e conclusão & obrigatório & \verb|\chapter| \\
+		\midrule
+		Pós-textual & Referências & obrigatório & \verb|\imprimirreferencias| \\
+		& Glossário & opcional & --- \\
+		& Apêndice & opcional & \texttt{apendicesenv} \\
+		& Anexo & opcional & \texttt{anexosenv} \\
+		& Índice & opcional & --- \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Adaptado de \citeonline{abnt14724}.}
+\end{quadro}
+
+Os elementos pré-textuais e pós-textuais estão no \texttt{main.tex}. Os opcionais vêm desativados entre \verb|\iffalse| e \verb|\fi|; para usar um deles, apague essas duas linhas.
+
+\section{Elementos pré-textuais}\label{sec:pre-textuais}
+
+A capa, a folha de rosto e a folha de aprovação são geradas a partir dos dados informados no preâmbulo: \verb|\titulo|, \verb|\autor|, \verb|\orientador|, \verb|\instituicao|, \verb|\campus|, \verb|\curso|, \verb|\local|, \verb|\data| e \verb|\preambulo|. Os membros da banca são informados com \verb|\membrobancaA| e \verb|\membrobancaB|, e a sigla da instituição de cada um vai entre colchetes, por exemplo \verb|\membrobancaB[UFMG]{Nome}|.
+
+O resumo segue a NBR 6028 \cite{abnt6028}: parágrafo único, com 150 a 500 palavras em trabalhos acadêmicos, seguido das palavras-chave, separadas entre si por ponto e vírgula e finalizadas por ponto. O resumo em língua estrangeira é a tradução do resumo em português.
+
+As listas de ilustrações, de tabelas, de siglas e de símbolos e o sumário \cite{abnt6027} são montados automaticamente a partir do texto. Cada sigla e cada símbolo é declarado uma única vez no \texttt{main.tex}.
+
+\section{Elementos textuais}\label{sec:textuais}
+
+A parte textual tem introdução, desenvolvimento e conclusão. A divisão do desenvolvimento em capítulos depende do tipo de trabalho e da área; uma divisão comum em trabalhos de conclusão de curso é: referencial teórico, trabalhos relacionados, metodologia, resultados e discussão.
+
+\section{Elementos pós-textuais}\label{sec:pos-textuais}
+
+As referências são geradas a partir do arquivo \texttt{referencias.bib}, como descrito no \autoref{cap:referencias}. Apêndices são textos elaborados pelo próprio autor; anexos são documentos de outros autores. Os dois são identificados por letras maiúsculas consecutivas, como mostram o \autoref{apendice:questionario} e o Anexo~\ref{anexo:lei}.
+
+\section{Regras gerais de formatação}\label{sec:formatacao}
+
+A classe abn\TeX2 e o pacote da UFV já aplicam as regras de apresentação da NBR 14724. Elas estão resumidas na \autoref{tab:formatacao} para que você saiba o que não deve alterar.
 
 \begin{table}[htbp]
+	\IBGEtab{%
+		\caption{Regras de formatação aplicadas pelo modelo}\label{tab:formatacao}
+	}{%
+		\begin{tabular}{ll}
+			\toprule
+			Item & Regra \\
+			\midrule
+			Papel & A4 (\SI{21}{\centi\metre} $\times$ \SI{29,7}{\centi\metre}) \\
+			Margens (anverso) & esquerda e superior: \SI{3}{\centi\metre}; direita e inferior: \SI{2}{\centi\metre} \\
+			Fonte do texto & tamanho 12 \\
+			Fonte menor & citações longas, notas, legendas e fontes \\
+			Espaçamento & 1,5 entre linhas; simples em citações longas, notas e referências \\
+			Paginação & contada a partir da folha de rosto e impressa a partir da introdução \\
+			Seções & numeração progressiva até a seção quinária \\
+			\bottomrule
+		\end{tabular}%
+	}{%
+		\fonte{\citeonline{abnt14724} e \citeonline{abnt6024}.}%
+	}
+\end{table}
+
+\section{Numeração progressiva}\label{sec:numeracao}
+
+A NBR 6024 \cite{abnt6024} organiza as seções em até cinco níveis, numerados em algarismos arábicos, com destaque tipográfico gradativo. Os comandos correspondentes são \verb|\chapter| (seção primária), \verb|\section| (secundária), \verb|\subsection| (terciária), \verb|\subsubsection| (quaternária) e \verb|\subsubsubsection| (quinária). Cada seção primária começa em nova página. As subdivisões a seguir mostram os níveis restantes.
+
+\subsection{Seção terciária}\label{sec:terciaria}
+
+Texto da seção terciária.
+
+\subsubsection{Seção quaternária}\label{sec:quaternaria}
+
+Texto da seção quaternária.
+
+\subsubsubsection{Seção quinária}\label{sec:quinaria}
+
+Texto da seção quinária. Não use níveis abaixo deste; se precisar enumerar mais subdivisões, use alíneas, apresentadas na \autoref{sec:alineas}.
+ % ----------------------------------------------------------
+% Capítulo 3 — Citações (NBR 10520)
+% ----------------------------------------------------------
+\chapter{Citações}\label{cap:citacoes}
+
+Citação é a menção, no texto, de uma informação extraída de outra fonte. A NBR 10520 \cite{abnt10520} define como apresentá-las. Citar não é apenas uma convenção acadêmica: a Lei de Direitos Autorais permite a citação de trechos de obras para fins de estudo, crítica ou polêmica, desde que se indiquem o nome do autor e a origem da obra \cite{brasil1998}. Cada citação no texto corresponde a uma entrada na lista de referências, e o modelo faz essa ligação automaticamente a partir do arquivo \texttt{referencias.bib}.
+
+Este modelo usa o sistema autor-data: a fonte é identificada pelo sobrenome do autor (ou pelo nome da entidade, ou pelo título) seguido do ano de publicação.
+
+\section{Comandos de citação}\label{sec:comandos-citacao}
+
+Os comandos do \autoref{qua:comandos-citacao} funcionam nas três versões da ABNT. O argumento é a chave da obra no arquivo \texttt{.bib}; o argumento opcional entre colchetes indica a página ou outro complemento.
+
+\begin{quadro}[htbp]
+	\caption{Comandos de citação}\label{qua:comandos-citacao}
+	\centering
+	\footnotesize
+	\begin{tabular}{p{0.47\textwidth}p{0.43\textwidth}}
+		\toprule
+		\textbf{Comando} & \textbf{Resultado neste documento} \\
+		\midrule
+		\verb|\cite{gil2017}| & \cite{gil2017} \\
+		\verb|\cite[p.~97]{knuth1984literate}| & \cite[p.~97]{knuth1984literate} \\
+		\verb|\citeonline{gil2017}| & \citeonline{gil2017} \\
+		\verb|\citeonline[p.~97]{knuth1984literate}| & \citeonline[p.~97]{knuth1984literate} \\
+		\verb|\cite{wilson2014,sandve2013}| & \cite{wilson2014,sandve2013} \\
+		\verb|\apud{memoir}{abntex2classe}| & \apud{memoir}{abntex2classe} \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Elaborado pelo autor.}
+\end{quadro}
+
+\section{Citação indireta}\label{sec:citacao-indireta}
+
+Na citação indireta, o texto é escrito com as palavras do autor do trabalho, com base na obra consultada. A indicação da página é opcional. Exemplos:
+
+\begin{alineas}
+	\item autor ao final da frase: práticas como controle de versões, automação de tarefas repetitivas e testes tornam o trabalho computacional mais confiável \cite{wilson2014};
+	\item autor integrado à frase: segundo \citeonline{sandve2013}, registrar como cada resultado foi obtido é condição para que uma pesquisa computacional possa ser reproduzida;
+	\item várias obras sobre o mesmo assunto, separadas por ponto e vírgula: \cite{wilson2014,wilson2017,sandve2013}.
+\end{alineas}
+
+\section{Citação direta}\label{sec:citacao-direta}
+
+Na citação direta, o trecho é transcrito literalmente, e a página (ou outra localização) é obrigatória.
+
+A citação direta curta, de até três linhas, fica no próprio parágrafo, entre aspas duplas. Por exemplo, \citeonline[p.~97]{knuth1984literate} propõe que nos concentremos em ``explaining to human beings what we want a computer to do''.
+
+A citação direta longa, com mais de três linhas, fica em parágrafo próprio, com recuo de \SI{4}{\centi\metre} da margem esquerda, letra menor, espaçamento simples e sem aspas. Ela é feita com o ambiente \texttt{citacao}; no exemplo a seguir, o ambiente é demonstrado com um trecho mais curto:
+
+\begin{citacao}[english]
+Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do \cite[p.~97]{knuth1984literate}.
+\end{citacao}
+
+O código do exemplo é:
+
+\begin{minted}{latex}
+\begin{citacao}[english]
+Let us change our traditional attitude [...] what we want a
+computer to do \cite[p.~97]{knuth1984literate}.
+\end{citacao}
+\end{minted}
+
+\section{Supressões, interpolações e destaques}\label{sec:supressoes}
+
+Em citações diretas:
+
+\begin{alineas}
+	\item supressões de trechos são indicadas por \texttt{[...]};
+	\item interpolações, acréscimos ou comentários do autor do trabalho ficam entre colchetes \texttt{[ ]};
+	\item ênfase ou destaque em parte do trecho é feita em itálico ou negrito, e a citação recebe a expressão ``grifo nosso''; se o destaque já existe na obra original, usa-se ``grifo do autor'';
+	\item trecho traduzido pelo autor do trabalho recebe a expressão ``tradução nossa''.
+\end{alineas}
+
+Exemplo com supressão e destaque: ``[...] let us concentrate rather on \textit{explaining to human beings} what we want a computer to do'' \cite[p.~97, grifo nosso]{knuth1984literate}.
+
+\section{Casos especiais}\label{sec:casos-especiais}
+
+\subsection{Mesmo autor e mesmo ano}
+
+Quando há mais de uma obra do mesmo autor no mesmo ano, letras minúsculas são acrescentadas ao ano, na citação e na referência, sem espaço. O modelo faz isso automaticamente: \cite{knuth1984texbook} e \cite{knuth1984literate}. Na versão 2002, o pacote \texttt{abntex2cite} acrescenta a letra apenas na citação; na lista de referências, ela só aparece nas versões 2018 e 2023.
+
+\subsection{Mais de três autores}
+
+Com mais de três autores, a citação indica o primeiro seguido da expressão \textit{et al.}, como em \citeonline{wilson2014}, obra que tem treze autores.
+
+\subsection{Entidade como autor}
+
+Quando o autor é uma entidade, como a ABNT ou o IBGE, a citação usa o nome da entidade ou a sigla definida no campo \texttt{shortauthor} do \texttt{.bib} (este último só nas versões 2018 e 2023): \cite{ibge1993}.
+
+\subsection{Citação de citação}
+
+A citação de citação, indicada pela expressão \textit{apud} (``citado por''), só deve ser usada quando o documento original não puder ser consultado. O comando \verb|\apud{original}{consultado}| produz \apud{memoir}{abntex2classe}, e \verb|\apudonline| a forma integrada ao texto.
+
+\section{Notas de rodapé}\label{sec:notas}
+
+Notas explicativas trazem comentários que interromperiam a leitura do texto.\footnote{As notas são numeradas em algarismos arábicos, com numeração consecutiva no documento, e impressas em letra menor, com espaçamento simples. São criadas com o comando \texttt{\textbackslash footnote}.} Como o modelo usa o sistema autor-data, as notas não devem ser usadas para referências.
+
+\section{O que muda entre as versões}\label{sec:mudancas-citacoes}
+
+A principal diferença entre a NBR 10520 de 2002 \cite{abnt10520-2002} e a de 2023 \cite{abnt10520} está na grafia do autor: na edição de 2002, o sobrenome entre parênteses é escrito em letras maiúsculas, como em (KNUTH, 1984); na de 2023, em letras maiúsculas e minúsculas, como em (Knuth, 1984), tanto dentro quanto fora dos parênteses. Com a opção \texttt{abnt} do pacote, essa diferença é aplicada sem alterar o texto.
+ % ----------------------------------------------------------
+% Capítulo 4 — Referências (NBR 6023)
+% ----------------------------------------------------------
+\chapter{Referências}\label{cap:referencias}
+
+Referência é o conjunto padronizado de elementos que permite identificar um documento \cite{abnt6023}. No \LaTeX, as referências não são digitadas na lista final: cada documento é cadastrado uma vez no arquivo \texttt{referencias.bib}, e a lista é montada com as obras efetivamente citadas, em ordem alfabética e no formato da versão da ABNT escolhida.
+
+\section{O arquivo .bib}\label{sec:arquivo-bib}
+
+Cada entrada do arquivo \texttt{.bib} tem um tipo, uma chave e uma lista de campos:
+
+\begin{minted}{bibtex}
+@book{gil2017,
+  author    = {Antonio Carlos Gil},
+  title     = {Como elaborar projetos de pesquisa},
+  edition   = {6},
+  address   = {São Paulo},
+  publisher = {Atlas},
+  year      = {2017}
+}
+\end{minted}
+
+A chave (\texttt{gil2017}) é o nome usado nos comandos de citação. Alguns cuidados:
+
+\begin{alineas}
+	\item vários autores são separados por \texttt{and}, nunca por vírgula ou ponto e vírgula;
+	\item entidades como autor ficam entre chaves duplas, para não serem lidas como nome e sobrenome: \verb|{{ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS}}|, em maiúsculas para que a versão 2002 as mantenha na citação;
+	\item subtítulos vão no campo \texttt{subtitle}, para que só o título receba destaque;
+	\item siglas e nomes próprios em títulos em inglês ficam entre chaves, para preservar as maiúsculas: \verb|{MapReduce}|;
+	\item documentos on-line levam a data de acesso em dois campos: \texttt{urlaccessdate} (versão 2002) e \texttt{urldate}, no formato AAAA-MM-DD (versões 2018 e 2023).
+\end{alineas}
+
+A maioria das bases de periódicos, catálogos de bibliotecas e o Google Acadêmico exportam referências em formato Bib\TeX. Revise sempre a entrada exportada: campos faltantes ou com maiúsculas indevidas são comuns.
+
+\section{Tipos de documento}\label{sec:tipos-documento}
+
+O \autoref{qua:tipos-bib} relaciona os tipos de documento mais comuns em trabalhos acadêmicos ao tipo de entrada no \texttt{.bib}, com um exemplo citado neste guia. As referências completas estão na lista de Referências ao final do documento.
+
+\begin{quadro}[htbp]
+	\caption{Tipos de documento e entradas no arquivo .bib}\label{qua:tipos-bib}
+	\centering
+	\small
+	\begin{tabular}{p{0.27\textwidth}p{0.22\textwidth}p{0.37\textwidth}}
+		\toprule
+		\textbf{Documento} & \textbf{Entrada} & \textbf{Exemplo} \\
+		\midrule
+		Livro & \texttt{@book} & \cite{lamport1994} \\
+		Capítulo de livro & \texttt{@incollection} & \cite{brooks1995} \\
+		Artigo de periódico & \texttt{@article} & \cite{wilson2017} \\
+		Trabalho em evento & \texttt{@inproceedings} & \cite{dean2004} \\
+		Tese & \texttt{@phdthesis} & \cite{fielding2000} \\
+		Dissertação & \texttt{@mastersthesis} & \cite{shannon1940} \\
+		Trabalho de conclusão de curso & \texttt{@mastersthesis} com \texttt{type} & ver \autoref{sec:tcc} \\
+		Norma técnica & \texttt{@book} & \cite{abnt14724} \\
+		Legislação & \texttt{@misc} & \cite{brasil1998} \\
+		Página da internet & \texttt{@misc} com \texttt{url} & \cite{semver} \\
+		Programa de computador & \texttt{@manual} & \cite{biblatexabnt} \\
+		Conjunto de dados & \texttt{@misc} com \texttt{doi} & \cite{fisher1936} \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Elaborado pelo autor.}
+\end{quadro}
+
+\subsection{Livro e capítulo de livro}
+
+O livro tem como elementos essenciais autor, título, edição (a partir da segunda), local, editora e ano, como em \citeonline{chacon2014}. No capítulo, o autor e o título do capítulo vêm antes da expressão ``In:'' e dos dados do livro. O capítulo de \citeonline{brooks1995} está na edição comemorativa de um livro do próprio autor; nesse caso, o campo \texttt{editor} repete o nome do autor.
+
+\subsection{Artigo de periódico}
+
+O artigo tem como elementos o título do periódico, volume, número, páginas e ano. Quando houver, o DOI é informado no campo \texttt{doi}, como em \citeonline{knuth1984literate}.
+
+\subsection{Trabalho em evento}
+
+O trabalho apresentado em evento é registrado com \texttt{@inproceedings}, com o título dos anais em \texttt{booktitle} e o nome do evento em \texttt{eventtitle}, como em \citeonline{dean2004}.
+
+\subsection{Tese, dissertação e trabalho de conclusão de curso}\label{sec:tcc}
+
+Teses usam \texttt{@phdthesis} e dissertações, \texttt{@mastersthesis}, com a instituição no campo \texttt{school}: \citeonline{fielding2000} e \citeonline{shannon1940}. Para um trabalho de conclusão de curso, use \texttt{@mastersthesis} e informe o tipo de trabalho no campo \texttt{type}. O modelo de entrada a seguir mostra os campos; substitua cada valor pelos dados do trabalho consultado:
+
+\begin{minted}{bibtex}
+@mastersthesis{sobrenome2025,
+  author  = {Nome Sobrenome},
+  title   = {Título do trabalho},
+  type    = {Trabalho de Conclusão de Curso (Bacharelado em
+             Sistemas de Informação)},
+  school  = {Universidade Federal de Viçosa},
+  address = {Rio Paranaíba},
+  year    = {2025}
+}
+\end{minted}
+
+\subsection{Norma técnica e legislação}
+
+Normas técnicas têm a entidade como autor e o código da norma como título, com o nome da norma em \texttt{subtitle}, como em \citeonline{abnt6023}. Leis e outros atos normativos têm a jurisdição como autor, a epígrafe (tipo, número e data) como título e a ementa e os dados de publicação em \texttt{note}, como em \citeonline{brasil1998}.
+
+\subsection{Documentos on-line, programas e conjuntos de dados}
+
+Documentos consultados on-line incluem o endereço eletrônico e a data de acesso, como em \citeonline{semver}. Programas de computador e pacotes \LaTeX\ registram a versão utilizada, como em \citeonline{biblatex}. Conjuntos de dados indicam o repositório e o DOI, como em \citeonline{fisher1936}.
+
+\section{O que muda entre as versões}\label{sec:mudancas-referencias}
+
+Entre a NBR 6023 de 2002 \cite{abnt6023-2002} e a de 2018 \cite{abnt6023}, as mudanças mais visíveis na lista de referências são:
+
+\begin{alineas}
+	\item as expressões para local e editora não identificados passam de [S.l.] e [s.n.] para \textit{[S. l.]} e \textit{[s. n.]};
+	\item o endereço eletrônico deixa de ser escrito entre os sinais \texttt{< >};
+	\item o DOI passa a ser um elemento complementar previsto pela norma;
+	\item as referências são alinhadas à margem esquerda, em espaço simples e separadas entre si por uma linha em branco.
+\end{alineas}
+
+Compile o guia nas três versões e compare as listas de referências para ver essas diferenças.
+ % ----------------------------------------------------------
+% Capítulo 5 — Ilustrações, tabelas e outros elementos
+% ----------------------------------------------------------
+\chapter{Ilustrações, Tabelas e Outros Elementos}\label{cap:elementos}
+
+Pela NBR 14724 \cite{abnt14724}, ilustrações (figuras, quadros, gráficos, desenhos, fotografias e outras) têm a identificação na parte superior, com a palavra designativa, o número de ordem e o título. Na parte inferior, indica-se a fonte consultada, obrigatória mesmo quando a ilustração é do próprio autor. Toda ilustração e toda tabela deve ser citada no texto e inserida o mais próximo possível do trecho a que se refere. Para citar um elemento, use \verb|\autoref{rótulo}|, que escreve a palavra designativa e o número, como em ``\autoref{fig:logo}''.
+
+\section{Figuras}\label{sec:figuras}
+
+A \autoref{fig:logo} mostra a inserção de uma imagem. O título vai em \verb|\caption|, antes da imagem, e a fonte em \verb|\fonte|, depois dela. Quando o título é longo, o argumento opcional de \verb|\caption| define um título curto para a lista de ilustrações.
+
+\begin{figure}[htbp]
+	\caption[Logotipo da UFV]{Logotipo da Universidade Federal de Viçosa, usado como exemplo de figura}\label{fig:logo}
+	\centering
+	\includegraphics[width=.4\linewidth]{assets/LogoUFV}
+	\fonte{Universidade Federal de Viçosa.}
+\end{figure}
+
+O código correspondente é:
+
+\begin{minted}{latex}
+\begin{figure}[htbp]
+  \caption[Título curto]{Título completo da figura}\label{fig:logo}
   \centering
-    \caption[Cronograma Normal]{Cronograma do Projeto em Meses}
-    \label{tab:cronograma}
-    \begin{tabular}{lcccccccccccc} %|c|c|c|c|c|c|c|c|c|c|c|c
-    \toprule
-    \textbf{Atividade} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
-    \midrule
-        Revisão Bibliográfica & $\bullet$ & $\bullet$ & & & & & & & & & & \\
-        Métodos & & & $\bullet$ & $\bullet$ & & & & & & & & \\
-        Testes & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & & & & \\
-        Resultados & & & & & & & $\bullet$ & $\bullet$ & & & & \\
-        Conclusão & & & & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & \\
-        Banca & & & & & & &&&& $\bullet$ & $\bullet$ & $\bullet$ \\
-    \bottomrule
-    \end{tabular}%
-    \fonte{Próprio Autor}
-\end{table}%
+  \includegraphics[width=.4\linewidth]{assets/LogoUFV}
+  \fonte{Universidade Federal de Viçosa.}
+\end{figure}
+\end{minted}
+
+Prefira imagens vetoriais (PDF ou SVG convertido para PDF) para gráficos e diagramas, e PNG ou JPG para fotografias.
+
+\subsection{Subfiguras}
+
+Figuras compostas são feitas com o ambiente \texttt{subfigure}, como na \autoref{fig:subfiguras}, cujas partes podem ser citadas isoladamente: \autoref{fig:sub-a} e \autoref{fig:sub-b}.
+
+\begin{figure}[htbp]
+	\caption{Exemplo de subfiguras}\label{fig:subfiguras}
+	\centering
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{assets/LogoUFV}
+		\caption{Tamanho maior}\label{fig:sub-a}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=.4\linewidth]{assets/LogoUFV}
+		\caption{Tamanho menor}\label{fig:sub-b}
+	\end{subfigure}
+	\fonte{Universidade Federal de Viçosa.}
+\end{figure}
+
+\section{Tabelas}\label{sec:tabelas}
+
+Tabelas apresentam dados numéricos e seguem as Normas de Apresentação Tabular do IBGE \cite{ibge1993}: não têm traços verticais nas bordas laterais, e os traços horizontais delimitam apenas o cabeçalho e o fim da tabela. O comando \verb|\IBGEtab| do abn\TeX2 organiza título, tabela e fonte nesse padrão, como na \autoref{tab:iris}. O pacote \texttt{siunitx} alinha os números pela vírgula decimal.
 
 \begin{table}[htbp]
-    \IBGEtab{
-    \caption[Cronograma (IBGE)]{Cronograma do Projeto em Meses usando o comando IBGEtab para a formatação da tabela}
-    \label{tab:cronogramaIBGE}
-    }{
-    \begin{tabular}{lcccccccccccc} %|c|c|c|c|c|c|c|c|c|c|c|c
-    \toprule
-    \textbf{Atividade} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
-    \midrule
-        Revisão Bibliográfica & $\bullet$ & $\bullet$ & & & & & & & & & & \\
-        Métodos & & & $\bullet$ & $\bullet$ & & & & & & & & \\
-        Testes & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & & & & \\
-        Resultados & & & & & & & $\bullet$ & $\bullet$ & & & & \\
-        Conclusão & & & & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & \\
-        Banca & & & & & & &&&& $\bullet$ & $\bullet$ & $\bullet$ \\
-    \bottomrule
-    \end{tabular}%
-    }{
-    \fonte{Próprio Autor}}
-\end{table}%
+	\IBGEtab{%
+		\caption{Estatísticas do conjunto de dados Iris (150 amostras)}\label{tab:iris}
+	}{%
+		\begin{tabular}{lS[table-format=1.1]S[table-format=1.1]S[table-format=1.2]S[table-format=1.2]}
+			\toprule
+			{Atributo (cm)} & {Mínimo} & {Máximo} & {Média} & {Desvio padrão} \\
+			\midrule
+			Comprimento da sépala & 4.3 & 7.9 & 5.84 & 0.83 \\
+			Largura da sépala & 2.0 & 4.4 & 3.05 & 0.43 \\
+			Comprimento da pétala & 1.0 & 6.9 & 3.76 & 1.76 \\
+			Largura da pétala & 0.1 & 2.5 & 1.20 & 0.76 \\
+			\bottomrule
+		\end{tabular}%
+	}{%
+		\fonte{\citeonline{fisher1936}.}%
+	}
+\end{table}
 
-\chapter{Resultados Esperados}\label{sec:resultEsperados}
+\section{Quadros}\label{sec:quadros}
 
-% ---
+Quadros apresentam informações textuais organizadas em linhas e colunas, como o \autoref{qua:estrutura} e o \autoref{qua:tipos-bib}. O ambiente \texttt{quadro}, definido no pacote \texttt{abntex2-UFV}, numera os quadros e os inclui na lista de quadros:
+
+\begin{minted}{latex}
+\begin{quadro}[htbp]
+  \caption{Título do quadro}\label{qua:exemplo}
+  \centering
+  \begin{tabular}{ll} ... \end{tabular}
+  \fonte{Elaborado pelo autor.}
+\end{quadro}
+\end{minted}
+
+Um quadro também é útil para cronogramas, como o \autoref{qua:cronograma}.
+
+\begin{quadro}[htbp]
+	\caption{Cronograma do trabalho, em meses}\label{qua:cronograma}
+	\centering
+	\footnotesize
+	\begin{tabular}{lcccccccccccc}
+		\toprule
+		\textbf{Atividade} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
+		\midrule
+		Revisão bibliográfica & $\bullet$ & $\bullet$ & & & & & & & & & & \\
+		Métodos & & & $\bullet$ & $\bullet$ & & & & & & & & \\
+		Experimentos & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & & & & \\
+		Resultados & & & & & & & $\bullet$ & $\bullet$ & & & & \\
+		Conclusão & & & & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & \\
+		Defesa & & & & & & & & & & $\bullet$ & $\bullet$ & $\bullet$ \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Elaborado pelo autor.}
+\end{quadro}
+
+\section{Equações}\label{sec:equacoes}
+
+Equações em destaque são numeradas e podem ser citadas no texto. A média aritmética $\bar{x}$ de uma amostra com $n$ observações é dada pela \autoref{eq:media}, e o desvio padrão amostral $s$, pela \autoref{eq:desvio}:
+
+\begin{equation}\label{eq:media}
+	\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+\end{equation}
+
+\begin{equation}\label{eq:desvio}
+	s = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} \left( x_i - \bar{x} \right)^2}
+\end{equation}
+
+Expressões curtas podem ficar no próprio texto, entre cifrões, como $e^{i\pi} + 1 = 0$. Para equações em várias linhas alinhadas, use o ambiente \texttt{align} do pacote \texttt{amsmath}:
+
+\begin{align}
+	(a + b)^2 &= a^2 + 2ab + b^2 \label{eq:quadrado-soma}\\
+	(a - b)^2 &= a^2 - 2ab + b^2 \label{eq:quadrado-diferenca}
+\end{align}
+
+\section{Algoritmos}\label{sec:algoritmos}
+
+Algoritmos em pseudocódigo são escritos com os pacotes \texttt{algorithm} e \texttt{algpseudocode}, como o \autoref{alg:euclides}.
+
+\begin{algorithm}[htbp]
+	\caption{Máximo divisor comum (algoritmo de Euclides)}\label{alg:euclides}
+	\begin{algorithmic}[1]
+		\Function{MDC}{$a, b$}
+			\While{$b \neq 0$}
+				\State $r \gets a \bmod b$
+				\State $a \gets b$
+				\State $b \gets r$
+			\EndWhile
+			\State \Return $a$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+\section{Código-fonte}\label{sec:codigo}
+
+Trechos de código são apresentados com o pacote \texttt{minted} \cite{minted}, que faz o realce de sintaxe de centenas de linguagens. O código a seguir implementa as Equações~\ref{eq:media} e~\ref{eq:desvio} em Python:
+
+\begin{minted}[linenos]{python}
+from math import sqrt
+
+def media(xs):
+    return sum(xs) / len(xs)
+
+def desvio_padrao(xs):
+    m = media(xs)
+    return sqrt(sum((x - m) ** 2 for x in xs) / (len(xs) - 1))
+\end{minted}
+
+Para um arquivo inteiro, use \verb|\inputminted{python}{caminho/arquivo.py}|. Quando o código precisa de número e título, coloque-o em um ambiente de figura ou quadro.
+
+\section{Alíneas}\label{sec:alineas}
+
+Enumerações dentro de uma seção são feitas em alíneas. Pela NBR 6024 \cite{abnt6024}, o texto que antecede as alíneas termina em dois-pontos; as alíneas são indicadas por letras minúsculas seguidas de parêntese, terminam em ponto e vírgula, exceto a última, que termina em ponto; e subalíneas começam por travessão:
+
+\begin{alineas}
+	\item primeira alínea;
+	\item segunda alínea, com subalíneas:
+	\begin{subalineas}
+		\item primeira subalínea;
+		\item segunda subalínea;
+	\end{subalineas}
+	\item última alínea.
+\end{alineas}
+
+\section{Siglas e símbolos}\label{sec:siglas}
+
+Na primeira ocorrência no texto, a sigla é precedida da forma completa, como em Instituto Brasileiro de Geografia e Estatística (IBGE). Siglas e símbolos usados no trabalho são listados nos ambientes \texttt{siglas} e \texttt{simbolos} do \texttt{main.tex}, em ordem alfabética.
+ % ----------------------------------------------------------
+% Capítulo 6 — Ferramentas e fluxo de trabalho
+% ----------------------------------------------------------
+\chapter{Ferramentas e Fluxo de Trabalho}\label{cap:ferramentas}
+
+Escrever em \LaTeX\ é parecido com programar: o texto-fonte é compilado para gerar o PDF. Práticas consolidadas no desenvolvimento de software, como controle de versões e automação de tarefas, também se aplicam à escrita acadêmica \cite{wilson2017}.
+
+\section{Compilação}\label{sec:compilacao}
+
+O modelo é compilado com o \texttt{latexmk} \cite{latexmk}, que executa o \texttt{pdflatex} e o programa de bibliografia quantas vezes forem necessárias para resolver citações, referências cruzadas e sumário. Na pasta do modelo:
+
+\begin{minted}{bash}
+latexmk main.tex      # compila e gera main.pdf
+latexmk -C            # apaga os arquivos gerados
+\end{minted}
+
+O programa de bibliografia depende da versão da ABNT escolhida: o Bib\TeX\ para a versão 2002, com o pacote \texttt{abntex2cite} \cite{abntex2cite}, e o Biber para as versões 2018 e 2023, com os pacotes \texttt{biblatex} \cite{biblatex} e \texttt{biblatex-abnt} \cite{biblatexabnt}. O \texttt{latexmk} detecta qual deles usar, mas, ao trocar de versão, apague os arquivos gerados com \texttt{latexmk -C} antes de compilar.
+
+O pacote \texttt{minted}, usado para código-fonte, precisa do Python 3 instalado. Se não for usar código-fonte, remova a linha \verb|\usepackage{minted}| e os exemplos que usam o ambiente \texttt{minted}.
+
+\subsection{Overleaf}
+
+O Overleaf é um editor de \LaTeX\ on-line. Para usar o modelo nele, baixe o arquivo \texttt{.zip} da versão da ABNT desejada na página de \textit{releases} do repositório e use a opção \textit{New Project} > \textit{Upload Project}.
+
+\subsection{Compilação de todos os modelos}
+
+No repositório do projeto, o \texttt{Makefile} compila todos os modelos em todas as versões da ABNT e gera os pacotes de distribuição:
+
+\begin{minted}{bash}
+make pdf ABNT=2002   # todos os modelos na versão escolhida
+make todas           # todos os modelos nas três versões
+make dist            # pacotes .zip e PDFs em dist/
+\end{minted}
+
+\section{Gerenciadores de referências}\label{sec:gerenciadores}
+
+Gerenciadores de referências organizam a bibliografia da pesquisa e exportam o arquivo \texttt{.bib}. O JabRef\footnote{Disponível em: \url{https://www.jabref.org/}.} edita arquivos \texttt{.bib} diretamente. O Zotero\footnote{Disponível em: \url{https://www.zotero.org/}.}, com a extensão Better Bib\TeX, mantém o arquivo \texttt{.bib} atualizado automaticamente.
+
+\section{Controle de versões}\label{sec:git}
+
+O Git registra o histórico do trabalho e permite recuperar qualquer versão anterior do texto \cite{chacon2014}. Um fluxo mínimo é:
+
+\begin{minted}{bash}
+git init                              # uma vez, na pasta do trabalho
+git add -A
+git commit -m "Escreve a seção de metodologia"
+\end{minted}
+
+Hospedar o repositório em um serviço como o GitHub cria uma cópia de segurança e facilita a revisão pelo orientador. Registrar também os dados, os scripts de análise e as versões dos programas usados permite que os resultados do trabalho sejam reproduzidos \cite{sandve2013}.
+ % ----------------------------------------------------------
+% Capítulo 7 — Conclusão
+% Na conclusão do seu trabalho, retome os objetivos, apresente
+% as respostas obtidas e indique trabalhos futuros.
+% ----------------------------------------------------------
+\chapter{Conclusão}\label{cap:conclusao}
+
+Este guia apresentou a estrutura do trabalho acadêmico segundo a NBR 14724, as citações segundo a NBR 10520, as referências segundo a NBR 6023 e os recursos do \LaTeX\ para ilustrações, tabelas, quadros, equações, algoritmos e código-fonte, além de ferramentas para compilar e versionar o documento. Cada recurso foi demonstrado no próprio documento, e o código-fonte correspondente pode ser copiado e adaptado.
+
+Na conclusão do seu trabalho, retome cada objetivo específico e indique como ele foi atingido, apresente as contribuições do trabalho e suas limitações.
+
+\section{Trabalhos futuros}\label{sec:trabalhos-futuros}
+
+Indique aqui as possibilidades de continuidade do trabalho.
+ % ---
 
 
 % ----------------------------------------------------------
 % ELEMENTOS PÓS-TEXTUAIS
 % ----------------------------------------------------------
-
 \postextual
 
-% Referências
+% Referências (obrigatório)
 \imprimirreferencias
 
-% Caso sejam necessários apêndices ou anexos em seu documento, use os ambientes abaixo
-
-%% Apêndices
-\iffalse % Remova essa linha para descomentar
+% Apêndices e anexos (opcionais)
+% ----------------------------------------------------------
+% Apêndices: textos elaborados pelo próprio autor.
+% Identificados por letras maiúsculas: APÊNDICE A, B, ...
+% ----------------------------------------------------------
 \begin{apendicesenv}
-  \partapendices
+	\partapendices
 
-  \chapter{Primeiro Apêndice}
-  \lipsum[1][1]
-  \chapter{Segundo Apêndice}
-  \lipsum[1][1]
+	\chapter{Questionário aplicado}\label{apendice:questionario}
+
+	Os apêndices reúnem material elaborado pelo autor que complementa o texto, como questionários, roteiros de entrevista, dados brutos ou demonstrações. Exemplo de questionário:
+
+	\begin{alineas}
+		\item Qual é o seu curso?
+		\item Você já escreveu algum trabalho em \LaTeX?
+		\item Qual editor de texto você usa com mais frequência?
+	\end{alineas}
 \end{apendicesenv}
-\fi % Remova essa linha para descomentar
-
-%% Anexos
-\iffalse % Remova essa linha para descomentar
+ % ----------------------------------------------------------
+% Anexos: documentos não elaborados pelo autor.
+% Identificados por letras maiúsculas: ANEXO A, B, ...
+% ----------------------------------------------------------
 \begin{anexosenv}
-  \partanexos
+	\partanexos
 
-  \chapter{Primeiro Anexo}
-  \lipsum[1][1]
-  \chapter{Segundo Anexo}
-  \lipsum[1][1]
+	\chapter{Documento de terceiros}\label{anexo:lei}
+
+	Os anexos reúnem documentos de outros autores que fundamentam ou ilustram o trabalho, como leis, regulamentos, manuais ou formulários. Um exemplo é a Lei de Direitos Autorais \cite{brasil1998}. Documentos em PDF podem ser incluídos com o pacote \texttt{pdfpages}, pelo comando \verb|\includepdf[pages=-]{arquivo.pdf}|.
 \end{anexosenv}
-\fi % Remova essa linha para descomentar
-
+ 
 \end{document}

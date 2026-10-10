@@ -1,0 +1,111 @@
+% ----------------------------------------------------------
+% Capítulo 4 — Referências (NBR 6023)
+% ----------------------------------------------------------
+\chapter{Referências}\label{cap:referencias}
+
+Referência é o conjunto padronizado de elementos que permite identificar um documento \cite{abnt6023}. No \LaTeX, as referências não são digitadas na lista final: cada documento é cadastrado uma vez no arquivo \texttt{referencias.bib}, e a lista é montada com as obras efetivamente citadas, em ordem alfabética e no formato da versão da ABNT escolhida.
+
+\section{O arquivo .bib}\label{sec:arquivo-bib}
+
+Cada entrada do arquivo \texttt{.bib} tem um tipo, uma chave e uma lista de campos:
+
+\begin{minted}{bibtex}
+@book{gil2017,
+  author    = {Antonio Carlos Gil},
+  title     = {Como elaborar projetos de pesquisa},
+  edition   = {6},
+  address   = {São Paulo},
+  publisher = {Atlas},
+  year      = {2017}
+}
+\end{minted}
+
+A chave (\texttt{gil2017}) é o nome usado nos comandos de citação. Alguns cuidados:
+
+\begin{alineas}
+	\item vários autores são separados por \texttt{and}, nunca por vírgula ou ponto e vírgula;
+	\item entidades como autor ficam entre chaves duplas, para não serem lidas como nome e sobrenome: \verb|{{ASSOCIAÇÃO BRASILEIRA DE NORMAS TÉCNICAS}}|, em maiúsculas para que a versão 2002 as mantenha na citação;
+	\item subtítulos vão no campo \texttt{subtitle}, para que só o título receba destaque;
+	\item siglas e nomes próprios em títulos em inglês ficam entre chaves, para preservar as maiúsculas: \verb|{MapReduce}|;
+	\item documentos on-line levam a data de acesso em dois campos: \texttt{urlaccessdate} (versão 2002) e \texttt{urldate}, no formato AAAA-MM-DD (versões 2018 e 2023).
+\end{alineas}
+
+A maioria das bases de periódicos, catálogos de bibliotecas e o Google Acadêmico exportam referências em formato Bib\TeX. Revise sempre a entrada exportada: campos faltantes ou com maiúsculas indevidas são comuns.
+
+\section{Tipos de documento}\label{sec:tipos-documento}
+
+O \autoref{qua:tipos-bib} relaciona os tipos de documento mais comuns em trabalhos acadêmicos ao tipo de entrada no \texttt{.bib}, com um exemplo citado neste guia. As referências completas estão na lista de Referências ao final do documento.
+
+\begin{quadro}[htbp]
+	\caption{Tipos de documento e entradas no arquivo .bib}\label{qua:tipos-bib}
+	\centering
+	\small
+	\begin{tabular}{p{0.27\textwidth}p{0.22\textwidth}p{0.37\textwidth}}
+		\toprule
+		\textbf{Documento} & \textbf{Entrada} & \textbf{Exemplo} \\
+		\midrule
+		Livro & \texttt{@book} & \cite{lamport1994} \\
+		Capítulo de livro & \texttt{@incollection} & \cite{brooks1995} \\
+		Artigo de periódico & \texttt{@article} & \cite{wilson2017} \\
+		Trabalho em evento & \texttt{@inproceedings} & \cite{dean2004} \\
+		Tese & \texttt{@phdthesis} & \cite{fielding2000} \\
+		Dissertação & \texttt{@mastersthesis} & \cite{shannon1940} \\
+		Trabalho de conclusão de curso & \texttt{@mastersthesis} com \texttt{type} & ver \autoref{sec:tcc} \\
+		Norma técnica & \texttt{@book} & \cite{abnt14724} \\
+		Legislação & \texttt{@misc} & \cite{brasil1998} \\
+		Página da internet & \texttt{@misc} com \texttt{url} & \cite{semver} \\
+		Programa de computador & \texttt{@manual} & \cite{biblatexabnt} \\
+		Conjunto de dados & \texttt{@misc} com \texttt{doi} & \cite{fisher1936} \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Elaborado pelo autor.}
+\end{quadro}
+
+\subsection{Livro e capítulo de livro}
+
+O livro tem como elementos essenciais autor, título, edição (a partir da segunda), local, editora e ano, como em \citeonline{chacon2014}. No capítulo, o autor e o título do capítulo vêm antes da expressão ``In:'' e dos dados do livro. O capítulo de \citeonline{brooks1995} está na edição comemorativa de um livro do próprio autor; nesse caso, o campo \texttt{editor} repete o nome do autor.
+
+\subsection{Artigo de periódico}
+
+O artigo tem como elementos o título do periódico, volume, número, páginas e ano. Quando houver, o DOI é informado no campo \texttt{doi}, como em \citeonline{knuth1984literate}.
+
+\subsection{Trabalho em evento}
+
+O trabalho apresentado em evento é registrado com \texttt{@inproceedings}, com o título dos anais em \texttt{booktitle} e o nome do evento em \texttt{eventtitle}, como em \citeonline{dean2004}.
+
+\subsection{Tese, dissertação e trabalho de conclusão de curso}\label{sec:tcc}
+
+Teses usam \texttt{@phdthesis} e dissertações, \texttt{@mastersthesis}, com a instituição no campo \texttt{school}: \citeonline{fielding2000} e \citeonline{shannon1940}. Para um trabalho de conclusão de curso, use \texttt{@mastersthesis} e informe o tipo de trabalho no campo \texttt{type}. O modelo de entrada a seguir mostra os campos; substitua cada valor pelos dados do trabalho consultado:
+
+\begin{minted}{bibtex}
+@mastersthesis{sobrenome2025,
+  author  = {Nome Sobrenome},
+  title   = {Título do trabalho},
+  type    = {Trabalho de Conclusão de Curso (Bacharelado em
+             Sistemas de Informação)},
+  school  = {Universidade Federal de Viçosa},
+  address = {Rio Paranaíba},
+  year    = {2025}
+}
+\end{minted}
+
+\subsection{Norma técnica e legislação}
+
+Normas técnicas têm a entidade como autor e o código da norma como título, com o nome da norma em \texttt{subtitle}, como em \citeonline{abnt6023}. Leis e outros atos normativos têm a jurisdição como autor, a epígrafe (tipo, número e data) como título e a ementa e os dados de publicação em \texttt{note}, como em \citeonline{brasil1998}.
+
+\subsection{Documentos on-line, programas e conjuntos de dados}
+
+Documentos consultados on-line incluem o endereço eletrônico e a data de acesso, como em \citeonline{semver}. Programas de computador e pacotes \LaTeX\ registram a versão utilizada, como em \citeonline{biblatex}. Conjuntos de dados indicam o repositório e o DOI, como em \citeonline{fisher1936}.
+
+\section{O que muda entre as versões}\label{sec:mudancas-referencias}
+
+Entre a NBR 6023 de 2002 \cite{abnt6023-2002} e a de 2018 \cite{abnt6023}, as mudanças mais visíveis na lista de referências são:
+
+\begin{alineas}
+	\item as expressões para local e editora não identificados passam de [S.l.] e [s.n.] para \textit{[S. l.]} e \textit{[s. n.]};
+	\item o endereço eletrônico deixa de ser escrito entre os sinais \texttt{< >};
+	\item o DOI passa a ser um elemento complementar previsto pela norma;
+	\item as referências são alinhadas à margem esquerda, em espaço simples e separadas entre si por uma linha em branco.
+\end{alineas}
+
+Compile o guia nas três versões e compare as listas de referências para ver essas diferenças.

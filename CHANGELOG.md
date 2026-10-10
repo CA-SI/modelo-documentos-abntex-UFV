@@ -2,6 +2,24 @@
 
 Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 
+## [1.1.0] - 2026-10-10
+
+### Adicionado
+- Os modelos viram um guia para trabalhos acadêmicos: estrutura (NBR 14724, NBR 6024),
+  citações (NBR 10520), referências (NBR 6023), ilustrações, tabelas, quadros,
+  equações, algoritmos, código-fonte, ferramentas, apêndices e anexos.
+- Base de referências com documentos reais de 11 tipos e modelo de entrada para TCC.
+- Ambiente `quadro` e lista de quadros no pacote `abntex2-UFV`.
+- `make gerar-unico`: o modelo de arquivo único é gerado a partir do modular (`latexpand`).
+
+### Alterado
+- Letras de desambiguação do ano (1984a, 1984b) também na lista de referências
+  nas versões 2018 e 2023 (opção `extradate` do biblatex-abnt).
+- Título da lista de referências fixado em "Referências" nas versões com biblatex.
+- Entidades autoras em maiúsculas no `.bib`, para a versão 2002 mantê-las na citação.
+- Créditos do repositório atualizados para Matheus Breguêz (matbrgz); `.mailmap` adicionado.
+- Actions do CI fixadas por SHA; permissão de escrita só no job de release.
+
 ## [1.0.0] - 2026-10-10
 
 ### Adicionado

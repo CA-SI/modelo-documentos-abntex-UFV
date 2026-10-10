@@ -1,0 +1,103 @@
+% ----------------------------------------------------------
+% Capítulo 2 — Estrutura do trabalho acadêmico (NBR 14724)
+% ----------------------------------------------------------
+\chapter{Estrutura do Trabalho Acadêmico}\label{cap:estrutura}
+
+A NBR 14724 \cite{abnt14724} define a estrutura dos trabalhos acadêmicos (teses, dissertações e trabalhos de conclusão de curso) em três partes: elementos pré-textuais, textuais e pós-textuais. O \autoref{qua:estrutura} lista os elementos na ordem em que aparecem e indica quais são obrigatórios.
+
+\begin{quadro}[htbp]
+	\caption{Elementos do trabalho acadêmico}\label{qua:estrutura}
+	\centering
+	\footnotesize
+	\begin{tabular}{p{0.12\textwidth}p{0.33\textwidth}p{0.13\textwidth}p{0.30\textwidth}}
+		\toprule
+		\textbf{Parte} & \textbf{Elemento} & \textbf{Uso} & \textbf{Comando} \\
+		\midrule
+		Externa & Capa & obrigatório & \verb|\imprimircapa| \\
+		& Lombada & opcional & --- \\
+		\midrule
+		Pré-textual & Folha de rosto & obrigatório & \verb|\imprimirfolhaderosto| \\
+		& Errata & opcional & \texttt{errata} \\
+		& Folha de aprovação & obrigatório & \verb|\imprimirfolhadeaprovacao| \\
+		& Dedicatória & opcional & \texttt{dedicatoria} \\
+		& Agradecimentos & opcional & \texttt{agradecimentos} \\
+		& Epígrafe & opcional & \texttt{epigrafe} \\
+		& Resumo na língua vernácula & obrigatório & \texttt{resumo} \\
+		& Resumo em língua estrangeira & obrigatório & \texttt{resumo} \\
+		& Lista de ilustrações & opcional & \verb|\listoffigures*| \\
+		& Lista de tabelas & opcional & \verb|\listoftables*| \\
+		& Lista de abreviaturas e siglas & opcional & \texttt{siglas} \\
+		& Lista de símbolos & opcional & \texttt{simbolos} \\
+		& Sumário & obrigatório & \verb|\tableofcontents*| \\
+		\midrule
+		Textual & Introdução, desenvolvimento e conclusão & obrigatório & \verb|\chapter| \\
+		\midrule
+		Pós-textual & Referências & obrigatório & \verb|\imprimirreferencias| \\
+		& Glossário & opcional & --- \\
+		& Apêndice & opcional & \texttt{apendicesenv} \\
+		& Anexo & opcional & \texttt{anexosenv} \\
+		& Índice & opcional & --- \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Adaptado de \citeonline{abnt14724}.}
+\end{quadro}
+
+Os elementos pré-textuais e pós-textuais estão no \texttt{main.tex}. Os opcionais vêm desativados entre \verb|\iffalse| e \verb|\fi|; para usar um deles, apague essas duas linhas.
+
+\section{Elementos pré-textuais}\label{sec:pre-textuais}
+
+A capa, a folha de rosto e a folha de aprovação são geradas a partir dos dados informados no preâmbulo: \verb|\titulo|, \verb|\autor|, \verb|\orientador|, \verb|\instituicao|, \verb|\campus|, \verb|\curso|, \verb|\local|, \verb|\data| e \verb|\preambulo|. Os membros da banca são informados com \verb|\membrobancaA| e \verb|\membrobancaB|, e a sigla da instituição de cada um vai entre colchetes, por exemplo \verb|\membrobancaB[UFMG]{Nome}|.
+
+O resumo segue a NBR 6028 \cite{abnt6028}: parágrafo único, com 150 a 500 palavras em trabalhos acadêmicos, seguido das palavras-chave, separadas entre si por ponto e vírgula e finalizadas por ponto. O resumo em língua estrangeira é a tradução do resumo em português.
+
+As listas de ilustrações, de tabelas, de siglas e de símbolos e o sumário \cite{abnt6027} são montados automaticamente a partir do texto. Cada sigla e cada símbolo é declarado uma única vez no \texttt{main.tex}.
+
+\section{Elementos textuais}\label{sec:textuais}
+
+A parte textual tem introdução, desenvolvimento e conclusão. A divisão do desenvolvimento em capítulos depende do tipo de trabalho e da área; uma divisão comum em trabalhos de conclusão de curso é: referencial teórico, trabalhos relacionados, metodologia, resultados e discussão.
+
+\section{Elementos pós-textuais}\label{sec:pos-textuais}
+
+As referências são geradas a partir do arquivo \texttt{referencias.bib}, como descrito no \autoref{cap:referencias}. Apêndices são textos elaborados pelo próprio autor; anexos são documentos de outros autores. Os dois são identificados por letras maiúsculas consecutivas, como mostram o \autoref{apendice:questionario} e o Anexo~\ref{anexo:lei}.
+
+\section{Regras gerais de formatação}\label{sec:formatacao}
+
+A classe abn\TeX2 e o pacote da UFV já aplicam as regras de apresentação da NBR 14724. Elas estão resumidas na \autoref{tab:formatacao} para que você saiba o que não deve alterar.
+
+\begin{table}[htbp]
+	\IBGEtab{%
+		\caption{Regras de formatação aplicadas pelo modelo}\label{tab:formatacao}
+	}{%
+		\begin{tabular}{ll}
+			\toprule
+			Item & Regra \\
+			\midrule
+			Papel & A4 (\SI{21}{\centi\metre} $\times$ \SI{29,7}{\centi\metre}) \\
+			Margens (anverso) & esquerda e superior: \SI{3}{\centi\metre}; direita e inferior: \SI{2}{\centi\metre} \\
+			Fonte do texto & tamanho 12 \\
+			Fonte menor & citações longas, notas, legendas e fontes \\
+			Espaçamento & 1,5 entre linhas; simples em citações longas, notas e referências \\
+			Paginação & contada a partir da folha de rosto e impressa a partir da introdução \\
+			Seções & numeração progressiva até a seção quinária \\
+			\bottomrule
+		\end{tabular}%
+	}{%
+		\fonte{\citeonline{abnt14724} e \citeonline{abnt6024}.}%
+	}
+\end{table}
+
+\section{Numeração progressiva}\label{sec:numeracao}
+
+A NBR 6024 \cite{abnt6024} organiza as seções em até cinco níveis, numerados em algarismos arábicos, com destaque tipográfico gradativo. Os comandos correspondentes são \verb|\chapter| (seção primária), \verb|\section| (secundária), \verb|\subsection| (terciária), \verb|\subsubsection| (quaternária) e \verb|\subsubsubsection| (quinária). Cada seção primária começa em nova página. As subdivisões a seguir mostram os níveis restantes.
+
+\subsection{Seção terciária}\label{sec:terciaria}
+
+Texto da seção terciária.
+
+\subsubsection{Seção quaternária}\label{sec:quaternaria}
+
+Texto da seção quaternária.
+
+\subsubsubsection{Seção quinária}\label{sec:quinaria}
+
+Texto da seção quinária. Não use níveis abaixo deste; se precisar enumerar mais subdivisões, use alíneas, apresentadas na \autoref{sec:alineas}.

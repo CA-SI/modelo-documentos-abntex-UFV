@@ -5,10 +5,25 @@
 [![GitHub contributors](https://img.shields.io/github/contributors/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/graphs/contributors)
 [![GitHub license](https://img.shields.io/github/license/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](LICENSE)
 
-Modelos LaTeX baseados no [abnTeX2](https://github.com/abntex/abntex2) para
+Guia e modelo LaTeX, baseado no [abnTeX2](https://github.com/abntex/abntex2), para
 trabalhos acadêmicos da Universidade Federal de Viçosa (UFV), com capa, folha de
 rosto e folha de aprovação no padrão da universidade. **Você escolhe a versão da
 ABNT** usada nas citações e referências.
+
+O modelo é também um guia: cada capítulo explica uma parte do trabalho e mostra,
+no próprio código, como produzi-la:
+
+| Capítulo | Conteúdo |
+|----------|----------|
+| 1. Introdução | como usar o modelo, escolha da versão da ABNT, objetivos |
+| 2. Estrutura | elementos pré-textuais, textuais e pós-textuais (NBR 14724), formatação, numeração progressiva (NBR 6024) |
+| 3. Citações | indireta, direta curta e longa, supressão, destaque, *apud*, *et al.*, notas (NBR 10520) |
+| 4. Referências | arquivo `.bib` e 12 tipos de documento: livro, capítulo, artigo, evento, tese, dissertação, TCC, norma, lei, página web, software, conjunto de dados (NBR 6023) |
+| 5. Elementos | figuras, subfiguras, tabelas IBGE, quadros, equações, algoritmos, código-fonte, alíneas, siglas |
+| 6. Ferramentas | latexmk, Overleaf, `make`, gerenciadores de referências, Git |
+| Apêndices e anexos | exemplos de cada um |
+
+Todas as referências de exemplo são documentos reais.
 
 ## Versões da ABNT disponíveis
 
@@ -24,8 +39,8 @@ O layout (margens, capa, folha de rosto, NBR 14724) é o mesmo nas três opçõe
 
 | Pasta | Descrição |
 |-------|-----------|
-| [`documentos/Artigo-Monografia`](documentos/Artigo-Monografia) | Monografia/TCC em um único arquivo `main.tex` |
-| [`documentos/Artigo-Monografia-Modular`](documentos/Artigo-Monografia-Modular) | Mesma monografia, com um arquivo por capítulo e seção |
+| [`documentos/Artigo-Monografia-Modular`](documentos/Artigo-Monografia-Modular) | Guia/monografia com um arquivo por capítulo (fonte do guia) |
+| [`documentos/Artigo-Monografia`](documentos/Artigo-Monografia) | O mesmo guia em um único `main.tex`, gerado a partir do modular |
 
 ## Como usar
 
@@ -76,7 +91,8 @@ make                 # todos os modelos, ABNT 2023 → build/<Modelo>/abnt-2023/
 make pdf ABNT=2002   # todos os modelos na versão escolhida
 make todas           # todos os modelos nas três versões
 make dist            # dist/<Modelo>-ABNT-<versão>.zip e .pdf
-make check           # confere o pacote de estilo, a validação de versão e compila tudo
+make gerar-unico     # regenera o modelo de arquivo único a partir do modular
+make check           # confere arquivos gerados, a validação de versão e compila tudo
 make clean           # apaga build/ e dist/
 ```
 
@@ -85,14 +101,16 @@ Para compilar só um modelo, dentro da pasta dele: `latexmk main.tex`.
 ## Estrutura do repositório
 
 ```
-estilo/abntex2-UFV.sty      pacote canônico (capa, folha de rosto, seleção da ABNT)
-documentos/<Modelo>/        modelos; misc/abntex2-UFV.sty é cópia gerada por `make sync`
+estilo/abntex2-UFV.sty      pacote canônico (capa, folha de rosto, quadro, seleção da ABNT)
+estilo/referencias.bib      base de referências canônica dos modelos
+documentos/<Modelo>/        modelos; misc/abntex2-UFV.sty e referencias.bib são cópias (`make sync`)
 docs/specs/                 especificações das mudanças (SDD)
 .github/workflows/          CI: compila em todo push e publica o Release em tags v*
 ```
 
-Edite sempre `estilo/abntex2-UFV.sty` e rode `make sync`. O `make check` falha se
-as cópias estiverem diferentes.
+Edite sempre os arquivos em `estilo/` e o guia em `documentos/Artigo-Monografia-Modular/`,
+e rode `make sync gerar-unico`. O `make check` falha se alguma cópia ou o arquivo único
+estiver desatualizado.
 
 ## Como contribuir
 

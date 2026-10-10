@@ -1,0 +1,101 @@
+% ----------------------------------------------------------
+% Capítulo 3 — Citações (NBR 10520)
+% ----------------------------------------------------------
+\chapter{Citações}\label{cap:citacoes}
+
+Citação é a menção, no texto, de uma informação extraída de outra fonte. A NBR 10520 \cite{abnt10520} define como apresentá-las. Citar não é apenas uma convenção acadêmica: a Lei de Direitos Autorais permite a citação de trechos de obras para fins de estudo, crítica ou polêmica, desde que se indiquem o nome do autor e a origem da obra \cite{brasil1998}. Cada citação no texto corresponde a uma entrada na lista de referências, e o modelo faz essa ligação automaticamente a partir do arquivo \texttt{referencias.bib}.
+
+Este modelo usa o sistema autor-data: a fonte é identificada pelo sobrenome do autor (ou pelo nome da entidade, ou pelo título) seguido do ano de publicação.
+
+\section{Comandos de citação}\label{sec:comandos-citacao}
+
+Os comandos do \autoref{qua:comandos-citacao} funcionam nas três versões da ABNT. O argumento é a chave da obra no arquivo \texttt{.bib}; o argumento opcional entre colchetes indica a página ou outro complemento.
+
+\begin{quadro}[htbp]
+	\caption{Comandos de citação}\label{qua:comandos-citacao}
+	\centering
+	\footnotesize
+	\begin{tabular}{p{0.47\textwidth}p{0.43\textwidth}}
+		\toprule
+		\textbf{Comando} & \textbf{Resultado neste documento} \\
+		\midrule
+		\verb|\cite{gil2017}| & \cite{gil2017} \\
+		\verb|\cite[p.~97]{knuth1984literate}| & \cite[p.~97]{knuth1984literate} \\
+		\verb|\citeonline{gil2017}| & \citeonline{gil2017} \\
+		\verb|\citeonline[p.~97]{knuth1984literate}| & \citeonline[p.~97]{knuth1984literate} \\
+		\verb|\cite{wilson2014,sandve2013}| & \cite{wilson2014,sandve2013} \\
+		\verb|\apud{memoir}{abntex2classe}| & \apud{memoir}{abntex2classe} \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Elaborado pelo autor.}
+\end{quadro}
+
+\section{Citação indireta}\label{sec:citacao-indireta}
+
+Na citação indireta, o texto é escrito com as palavras do autor do trabalho, com base na obra consultada. A indicação da página é opcional. Exemplos:
+
+\begin{alineas}
+	\item autor ao final da frase: práticas como controle de versões, automação de tarefas repetitivas e testes tornam o trabalho computacional mais confiável \cite{wilson2014};
+	\item autor integrado à frase: segundo \citeonline{sandve2013}, registrar como cada resultado foi obtido é condição para que uma pesquisa computacional possa ser reproduzida;
+	\item várias obras sobre o mesmo assunto, separadas por ponto e vírgula: \cite{wilson2014,wilson2017,sandve2013}.
+\end{alineas}
+
+\section{Citação direta}\label{sec:citacao-direta}
+
+Na citação direta, o trecho é transcrito literalmente, e a página (ou outra localização) é obrigatória.
+
+A citação direta curta, de até três linhas, fica no próprio parágrafo, entre aspas duplas. Por exemplo, \citeonline[p.~97]{knuth1984literate} propõe que nos concentremos em ``explaining to human beings what we want a computer to do''.
+
+A citação direta longa, com mais de três linhas, fica em parágrafo próprio, com recuo de \SI{4}{\centi\metre} da margem esquerda, letra menor, espaçamento simples e sem aspas. Ela é feita com o ambiente \texttt{citacao}; no exemplo a seguir, o ambiente é demonstrado com um trecho mais curto:
+
+\begin{citacao}[english]
+Let us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do \cite[p.~97]{knuth1984literate}.
+\end{citacao}
+
+O código do exemplo é:
+
+\begin{minted}{latex}
+\begin{citacao}[english]
+Let us change our traditional attitude [...] what we want a
+computer to do \cite[p.~97]{knuth1984literate}.
+\end{citacao}
+\end{minted}
+
+\section{Supressões, interpolações e destaques}\label{sec:supressoes}
+
+Em citações diretas:
+
+\begin{alineas}
+	\item supressões de trechos são indicadas por \texttt{[...]};
+	\item interpolações, acréscimos ou comentários do autor do trabalho ficam entre colchetes \texttt{[ ]};
+	\item ênfase ou destaque em parte do trecho é feita em itálico ou negrito, e a citação recebe a expressão ``grifo nosso''; se o destaque já existe na obra original, usa-se ``grifo do autor'';
+	\item trecho traduzido pelo autor do trabalho recebe a expressão ``tradução nossa''.
+\end{alineas}
+
+Exemplo com supressão e destaque: ``[...] let us concentrate rather on \textit{explaining to human beings} what we want a computer to do'' \cite[p.~97, grifo nosso]{knuth1984literate}.
+
+\section{Casos especiais}\label{sec:casos-especiais}
+
+\subsection{Mesmo autor e mesmo ano}
+
+Quando há mais de uma obra do mesmo autor no mesmo ano, letras minúsculas são acrescentadas ao ano, na citação e na referência, sem espaço. O modelo faz isso automaticamente: \cite{knuth1984texbook} e \cite{knuth1984literate}. Na versão 2002, o pacote \texttt{abntex2cite} acrescenta a letra apenas na citação; na lista de referências, ela só aparece nas versões 2018 e 2023.
+
+\subsection{Mais de três autores}
+
+Com mais de três autores, a citação indica o primeiro seguido da expressão \textit{et al.}, como em \citeonline{wilson2014}, obra que tem treze autores.
+
+\subsection{Entidade como autor}
+
+Quando o autor é uma entidade, como a ABNT ou o IBGE, a citação usa o nome da entidade ou a sigla definida no campo \texttt{shortauthor} do \texttt{.bib} (este último só nas versões 2018 e 2023): \cite{ibge1993}.
+
+\subsection{Citação de citação}
+
+A citação de citação, indicada pela expressão \textit{apud} (``citado por''), só deve ser usada quando o documento original não puder ser consultado. O comando \verb|\apud{original}{consultado}| produz \apud{memoir}{abntex2classe}, e \verb|\apudonline| a forma integrada ao texto.
+
+\section{Notas de rodapé}\label{sec:notas}
+
+Notas explicativas trazem comentários que interromperiam a leitura do texto.\footnote{As notas são numeradas em algarismos arábicos, com numeração consecutiva no documento, e impressas em letra menor, com espaçamento simples. São criadas com o comando \texttt{\textbackslash footnote}.} Como o modelo usa o sistema autor-data, as notas não devem ser usadas para referências.
+
+\section{O que muda entre as versões}\label{sec:mudancas-citacoes}
+
+A principal diferença entre a NBR 10520 de 2002 \cite{abnt10520-2002} e a de 2023 \cite{abnt10520} está na grafia do autor: na edição de 2002, o sobrenome entre parênteses é escrito em letras maiúsculas, como em (KNUTH, 1984); na de 2023, em letras maiúsculas e minúsculas, como em (Knuth, 1984), tanto dentro quanto fora dos parênteses. Com a opção \texttt{abnt} do pacote, essa diferença é aplicada sem alterar o texto.

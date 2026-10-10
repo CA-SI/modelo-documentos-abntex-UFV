@@ -1,5 +1,11 @@
-Modelo abnTeX2 UFV
-==================
+Guia e modelo abnTeX2 UFV
+=========================
+
+O documento é um guia: cada capítulo explica uma parte do trabalho
+acadêmico e demonstra como produzi-la. Substitua o texto pelo seu.
+
+Este main.tex é gerado a partir do modelo modular; no repositório,
+edite o modular e rode "make gerar-unico".
 
 Versão da ABNT: altere a opção no main.tex
 
