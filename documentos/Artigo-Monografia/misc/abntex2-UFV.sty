@@ -66,9 +66,9 @@
   % NBR 6023:2018; citações conforme NBR 10520:2023 ou, com accite, 2002
   \RequirePackage{csquotes}
   \ifx\UFV@abnt\UFV@versaoB
-    \RequirePackage[style=abnt,backend=biber,extradate,accite]{biblatex}
+    \RequirePackage[style=abnt,backend=biber,extradate,uniquelist=false,accite]{biblatex}
   \else
-    \RequirePackage[style=abnt,backend=biber,extradate]{biblatex}
+    \RequirePackage[style=abnt,backend=biber,extradate,uniquelist=false]{biblatex}
   \fi
   \newcommand{\arquivoreferencias}[1]{\addbibresource{#1.bib}}
   \newcommand{\imprimirreferencias}{\printbibliography[heading=bibintoc,title={Referências}]}
