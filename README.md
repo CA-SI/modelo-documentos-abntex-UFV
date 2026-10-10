@@ -10,10 +10,10 @@ trabalhos acadêmicos da Universidade Federal de Viçosa (UFV), com capa, folha 
 rosto e folha de aprovação no padrão da universidade. **Você escolhe a versão da
 ABNT** usada nas citações e referências.
 
-O modelo é também um guia: cada capítulo explica uma parte do trabalho e mostra,
+O modelo é também um guia: cada seção primária explica uma parte do trabalho e mostra,
 no próprio código, como produzi-la:
 
-| Capítulo | Conteúdo |
+| Seção | Conteúdo |
 |----------|----------|
 | 1. Introdução | como usar o modelo, escolha da versão da ABNT, objetivos |
 | 2. Estrutura | elementos pré-textuais, textuais e pós-textuais (NBR 14724), formatação, numeração progressiva (NBR 6024) |
@@ -29,17 +29,21 @@ Todas as referências de exemplo são documentos reais.
 
 | Opção | Citações | Referências | Motor | Quando usar |
 |-------|----------|-------------|-------|-------------|
-| `abnt=2023` (padrão) | NBR 10520:2023 — `(Silva, 2020)` | NBR 6023:2018 | biblatex-abnt + Biber | Normas vigentes |
+| `abnt=2023` (padrão) | NBR 10520:2023 — `(Silva, 2020)` | NBR 6023:2018 | biblatex-abnt + Biber | Citações conforme a edição vigente |
 | `abnt=2018` | NBR 10520:2002 — `(SILVA, 2020)` | NBR 6023:2018 | biblatex-abnt + Biber | Orientador exige autor em caixa alta na citação |
 | `abnt=2002` | NBR 10520:2002 — `(SILVA, 2020)` | NBR 6023:2002 | abntex2cite + BibTeX | Normas antigas, compatível com modelos anteriores |
 
-O layout (margens, capa, folha de rosto, NBR 14724) é o mesmo nas três opções.
+O layout (margens, capa, folha de rosto, NBR 14724:2024) é o mesmo nas três opções.
+
+> A NBR 6023 teve nova edição em 2025, com mudanças pontuais (coleções e fascículos de
+> periódicos, e-localização em artigos eletrônicos, evento no todo e jurisprudência). O
+> `biblatex-abnt` 4.0 segue a edição de 2018; confira esses tipos de referência com a de 2025.
 
 ## Modelos
 
 | Pasta | Descrição |
 |-------|-----------|
-| [`documentos/Artigo-Monografia-Modular`](documentos/Artigo-Monografia-Modular) | Guia/monografia com um arquivo por capítulo (fonte do guia) |
+| [`documentos/Artigo-Monografia-Modular`](documentos/Artigo-Monografia-Modular) | Guia/monografia com um arquivo por seção primária (fonte do guia) |
 | [`documentos/Artigo-Monografia`](documentos/Artigo-Monografia) | O mesmo guia em um único `main.tex`, gerado a partir do modular |
 
 ## Como usar

@@ -8,6 +8,8 @@
 #   make gerar-unico      gera o modelo de arquivo único a partir do modular
 #   make clean            apaga build/ e dist/
 
+.DELETE_ON_ERROR:
+
 ABNT     ?= 2023
 VERSOES  := 2002 2018 2023
 MODELOS  := Artigo-Monografia Artigo-Monografia-Modular
@@ -21,7 +23,7 @@ LATEXMK  := latexmk -pdf -interaction=nonstopmode -halt-on-error -file-line-erro
 
 COPIAS_ESTILO := $(foreach m,$(MODELOS),documentos/$(m)/misc/abntex2-UFV.sty)
 COPIAS_BIB    := $(foreach m,$(MODELOS),documentos/$(m)/referencias.bib)
-FONTES_GUIA   := $(MODULAR)/main.tex $(wildcard $(MODULAR)/capitulos/*.tex $(MODULAR)/pos-textuais/*.tex)
+FONTES_GUIA   := $(MODULAR)/main.tex $(wildcard $(MODULAR)/secoes/*.tex $(MODULAR)/pos-textuais/*.tex)
 pdfs = $(foreach v,$(1),$(foreach m,$(MODELOS),$(BUILD)/$(m)/abnt-$(v)/main.pdf))
 
 .PHONY: all pdf todas dist sync gerar-unico check verificar-estilo verificar-unico verificar-versao-invalida clean FORCE
@@ -65,7 +67,7 @@ dist: todas
 	@set -e; for m in $(MODELOS); do for v in $(VERSOES); do \
 	  nome="$$m-ABNT-$$v"; destino="$(BUILD)/stage/$$nome"; \
 	  echo "==> $(DIST)/$$nome.zip"; \
-	  mkdir -p "$$destino"; \
+	  rm -rf "$$destino" "$(DIST)/$$nome.zip"; mkdir -p "$$destino"; \
 	  cp -R "documentos/$$m/." "$$destino/"; \
 	  sed "s/\[abnt=[0-9]*\]/[abnt=$$v]/" "documentos/$$m/main.tex" > "$$destino/main.tex"; \
 	  cp "$(BUILD)/$$m/abnt-$$v/main.pdf" "$$destino/$$nome.pdf"; \
@@ -73,9 +75,11 @@ dist: todas
 	  (cd "$(BUILD)/stage" && zip -qr "$(CURDIR)/$(DIST)/$$nome.zip" "$$nome"); \
 	done; done
 
-check: sync verificar-estilo verificar-unico verificar-versao-invalida todas
+# As verificações rodam antes de qualquer regeneração, para acusar cópias
+# e arquivo único desatualizados no repositório.
+check: verificar-estilo verificar-unico verificar-versao-invalida todas
 
-verificar-estilo: sync
+verificar-estilo:
 	@set -e; for f in $(COPIAS_ESTILO); do \
 	  cmp -s $(ESTILO) "$$f" || { echo "ERRO: $$f difere de $(ESTILO). Rode 'make sync'."; exit 1; }; \
 	done; for f in $(COPIAS_BIB); do \
@@ -90,7 +94,7 @@ verificar-unico:
 	@echo "Modelo de arquivo único em dia com o modular."
 
 # Uma versão inexistente tem de interromper a compilação.
-verificar-versao-invalida: $(COPIAS_ESTILO)
+verificar-versao-invalida:
 	@mkdir -p $(BUILD)/invalida && cd documentos/Artigo-Monografia && \
 	if pdflatex -interaction=nonstopmode -halt-on-error -output-directory=$(CURDIR)/$(BUILD)/invalida \
 	    '\def\ABNTversao{1999}\input{main.tex}' > /dev/null 2>&1; then \

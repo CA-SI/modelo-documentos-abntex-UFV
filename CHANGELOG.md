@@ -13,6 +13,13 @@ Formato baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/).
 - `make gerar-unico`: o modelo de arquivo único é gerado a partir do modular (`latexpand`).
 
 ### Corrigido
+- Guia alinhado à NBR 14724:2024 (4. ed.): trabalho organizado em seções, não em capítulos
+  (cabeçalhos e `\autoref` dizem "Seção"); fonte de ilustração própria "Elaborado pelo próprio autor".
+- Guia e README registram a NBR 6023:2025 e o que ela altera; o estilo bibliográfico segue a de 2018.
+- Texto do guia sobre a estrutura de arquivos vale para o modelo de arquivo único e para o modular.
+- `make check` verifica cópias e arquivo único antes de regenerá-los; `.DELETE_ON_ERROR`;
+  `make dist` recria cada pacote do zero.
+- Pasta `capitulos/` do modelo modular renomeada para `secoes/`.
 - Quadro saía como "quadro 1:" com legenda fora do padrão quando o pacote `float`
   (carregado por `minted` e `algorithm`) vinha antes do `abntex2-UFV`.
 
