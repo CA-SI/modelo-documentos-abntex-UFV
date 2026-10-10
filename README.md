@@ -144,6 +144,11 @@ Para creditar alguém em um PR ou issue, comente
 Modelo original de Rodrigo Smarzaro e do Centro Acadêmico de Sistemas de
 Informação (CASI), UFV *Campus* Rio Paranaíba.
 
+## Artigo
+
+O projeto é apresentado no artigo [CA-SI/artigo-modelo-abntex-ufv](https://github.com/CA-SI/artigo-modelo-abntex-ufv),
+escrito com o próprio pacote `abntex2-UFV`.
+
 ## Licença
 
 [MIT](LICENSE)
