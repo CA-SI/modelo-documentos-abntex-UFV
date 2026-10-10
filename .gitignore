@@ -1,2 +1,26 @@
-archive
-node_modules
+# Saídas do build
+build/
+dist/
+
+# Arquivos auxiliares do LaTeX (compilação dentro da pasta do modelo)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+_minted*/
+documentos/*/main.pdf
+
+.DS_Store

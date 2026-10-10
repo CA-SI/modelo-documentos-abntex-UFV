@@ -1,39 +1,107 @@
-# Modelo de Documentos AbnTex UFV
-[![GitHub contributors](https://img.shields.io/github/contributors/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV)
-[![GitHub stars](https://img.shields.io/github/stars/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/network)
-[![GitHub license](https://img.shields.io/github/license/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV)
-[![Discord](https://img.shields.io/discord/365311890420793346.svg?style=flat-square)](https://discord.gg/aR6cGkG)
+# Modelo de Documentos abnTeX2 UFV
 
-Esse é o repositório publico de Documento AbnTex personalizados para Universidade Federal de Viçosa. Aqui você irá encontrar o orquestrador de distruibuições dos documentos e também os modelos de documentos AbnTex UFV. A colaboração é importante, siga as diretrizes, contribua e vença.
+[![Build](https://github.com/CA-SI/modelo-documentos-abntex-UFV/actions/workflows/build.yml/badge.svg)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/actions/workflows/build.yml)
+[![GitHub release](https://img.shields.io/github/v/release/CA-SI/modelo-documentos-abntex-UFV?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/releases)
+[![GitHub contributors](https://img.shields.io/github/contributors/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/graphs/contributors)
+[![GitHub license](https://img.shields.io/github/license/CA-SI/modelo-documentos-abntex-UFV.svg?style=flat-square)](LICENSE)
 
-## Como Usar?
-Você pode consultar os documentos das distribuições em [Releases](https://github.com/CA-SI/modelo-documentos-abntex-UFV/releases)
+Modelos LaTeX baseados no [abnTeX2](https://github.com/abntex/abntex2) para
+trabalhos acadêmicos da Universidade Federal de Viçosa (UFV), com capa, folha de
+rosto e folha de aprovação no padrão da universidade. **Você escolhe a versão da
+ABNT** usada nas citações e referências.
 
-## Diretrizes de Contribuição
-- Todo material disponível está licensiado sob [MIT](https://github.com/CA-SI/modelo-documentos-abntex-UFV/blob/master/LICENSE)
-- Novas diretrizes em discussão, [participe](https://github.com/CA-SI/modelo-documentos-abntex-UFV/issues/1).
+## Versões da ABNT disponíveis
 
-## Como Enviar Conteúdo
-Você deve seguir os passos para a submissão de qualquer tipo de conteúdo.
+| Opção | Citações | Referências | Motor | Quando usar |
+|-------|----------|-------------|-------|-------------|
+| `abnt=2023` (padrão) | NBR 10520:2023 — `(Silva, 2020)` | NBR 6023:2018 | biblatex-abnt + Biber | Normas vigentes |
+| `abnt=2018` | NBR 10520:2002 — `(SILVA, 2020)` | NBR 6023:2018 | biblatex-abnt + Biber | Orientador exige autor em caixa alta na citação |
+| `abnt=2002` | NBR 10520:2002 — `(SILVA, 2020)` | NBR 6023:2002 | abntex2cite + BibTeX | Normas antigas, compatível com modelos anteriores |
 
-Requisitos: Git
+O layout (margens, capa, folha de rosto, NBR 14724) é o mesmo nas três opções.
 
-- Dê um Fork no projeto, ou simplesmente clique na caixa ao lado >>>
-[![GitHub forks](https://img.shields.io/github/forks/CA-SI/modelo-documentos-abntex-UFV.svg?label=Fork&style=flat-square)](https://github.com/CA-SI/modelo-documentos-abntex-UFV/fork)
-- Abra um terminal (seja Bash on Windows, Linux ou Git Bash)
-- Clone o projeto em sua maquina com `git clone https://github.com/<seu-usuario>/modelo-documentos-abntex-UFV/`
-- Crie um branch com comando `git checkout -b [nome-do-branch]`, geralmente seu nome
-- Adicione o seu material
-- Execute os comandos:
-    - `git add -A`
-    - `git commit -a -m "<informações-sobre-o-commit>"`
-- Então em seguida envie suas mudanças para o seu fork com o comando `git push`
-- Agora você já pode enviar um pull request use o comando `git request-pull https://github.com/CA-SI/modelo-documentos-abntex-UFV master`
+## Modelos
 
-## Moderadores
-Para adicioanar um colaborador ao aceitar um Pull Request ou em um Issue, comente o seguinte dizer
-`@all-contributors please add @jakebolam for infrastructure, tests and code` seguindo a [tabela All Contributors](https://allcontributors.org/docs/pt-br/emoji-key)
+| Pasta | Descrição |
+|-------|-----------|
+| [`documentos/Artigo-Monografia`](documentos/Artigo-Monografia) | Monografia/TCC em um único arquivo `main.tex` |
+| [`documentos/Artigo-Monografia-Modular`](documentos/Artigo-Monografia-Modular) | Mesma monografia, com um arquivo por capítulo e seção |
+
+## Como usar
+
+### 1. Baixar pronto (mais fácil)
+
+Em [Releases](https://github.com/CA-SI/modelo-documentos-abntex-UFV/releases),
+baixe o `.zip` do modelo **já configurado na versão da ABNT que você quer**, por
+exemplo `Artigo-Monografia-ABNT-2023.zip`. Cada `.zip` traz o código-fonte e o
+PDF de exemplo. Funciona no [Overleaf](https://www.overleaf.com/)
+(*New Project → Upload Project*) ou no seu computador.
+
+### 2. Escolher a versão no documento
+
+No `main.tex`, troque o valor da opção:
+
+```latex
+\usepackage[abnt=2023]{misc/abntex2-UFV}   % ou abnt=2018, abnt=2002
+```
+
+O mesmo texto funciona nas três versões. Use sempre:
+
+```latex
+% preâmbulo
+\arquivoreferencias{referencias}   % referencias.bib, sem a extensão
+
+% texto
+\cite{chave}               % (Autor, ano)
+\cite[p.~42]{chave}        % (Autor, ano, p. 42)
+\citeonline{chave}         % Autor (ano)
+\apud{original}{fonte}     % (Original apud Fonte)
+\apudonline{original}{fonte}
+
+% elementos pós-textuais
+\imprimirreferencias
+```
+
+Ao trocar de versão, apague os arquivos auxiliares (`.aux`, `.bbl`, `.bcf`) ou
+rode `latexmk -C`, porque as versões usam programas de bibliografia diferentes
+(BibTeX ou Biber).
+
+### 3. Compilar todas as versões com `make`
+
+Requisitos: [TeX Live](https://tug.org/texlive/) 2024 ou mais recente (inclui
+`latexmk`, `biber` e `biblatex-abnt` 4.0+), Python 3 (para o pacote `minted`) e `zip`.
+
+```sh
+make                 # todos os modelos, ABNT 2023 → build/<Modelo>/abnt-2023/main.pdf
+make pdf ABNT=2002   # todos os modelos na versão escolhida
+make todas           # todos os modelos nas três versões
+make dist            # dist/<Modelo>-ABNT-<versão>.zip e .pdf
+make check           # confere o pacote de estilo, a validação de versão e compila tudo
+make clean           # apaga build/ e dist/
+```
+
+Para compilar só um modelo, dentro da pasta dele: `latexmk main.tex`.
+
+## Estrutura do repositório
+
+```
+estilo/abntex2-UFV.sty      pacote canônico (capa, folha de rosto, seleção da ABNT)
+documentos/<Modelo>/        modelos; misc/abntex2-UFV.sty é cópia gerada por `make sync`
+docs/specs/                 especificações das mudanças (SDD)
+.github/workflows/          CI: compila em todo push e publica o Release em tags v*
+```
+
+Edite sempre `estilo/abntex2-UFV.sty` e rode `make sync`. O `make check` falha se
+as cópias estiverem diferentes.
+
+## Como contribuir
+
+1. Faça um [fork](https://github.com/CA-SI/modelo-documentos-abntex-UFV/fork) e clone.
+2. Crie uma branch: `git checkout -b minha-melhoria`.
+3. Faça a alteração e rode `make check`.
+4. Faça commit, `git push` e abra um Pull Request.
+
+Para publicar uma versão, crie uma tag `vX.Y.Z`; o CI anexa os `.zip` e PDFs ao Release.
 
 ## Colaboradores
 
@@ -50,9 +118,14 @@ Para adicioanar um colaborador ao aceitar um Pull Request ou em um Issue, coment
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Este projeto segue a especificação [all-contributors](https://github.com/kentcdodds/all-contributors). Contribuições de qualquer tipo são bem vindas!
+Este projeto segue a especificação [all-contributors](https://allcontributors.org/).
+Para creditar alguém em um PR ou issue, comente
+`@all-contributors please add @usuario for code, doc`
+(veja a [tabela de tipos](https://allcontributors.org/docs/pt-br/emoji-key)).
+
+Modelo original de Rodrigo Smarzaro e do Centro Acadêmico de Sistemas de
+Informação (CASI), UFV *Campus* Rio Paranaíba.
 
 ## Licença
-MIT
 
-
+[MIT](LICENSE)
