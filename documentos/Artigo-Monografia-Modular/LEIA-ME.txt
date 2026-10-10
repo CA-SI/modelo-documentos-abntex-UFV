@@ -1,5 +1,8 @@
-Modelo abnTeX2 UFV
-==================
+Guia e modelo abnTeX2 UFV
+=========================
+
+O documento é um guia: cada capítulo explica uma parte do trabalho
+acadêmico e demonstra como produzi-la. Substitua o texto pelo seu.
 
 Versão da ABNT: altere a opção no main.tex
 

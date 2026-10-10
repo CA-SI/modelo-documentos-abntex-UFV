@@ -1,0 +1,49 @@
+% ----------------------------------------------------------
+% Capítulo 6 — Ferramentas e fluxo de trabalho
+% ----------------------------------------------------------
+\chapter{Ferramentas e Fluxo de Trabalho}\label{cap:ferramentas}
+
+Escrever em \LaTeX\ é parecido com programar: o texto-fonte é compilado para gerar o PDF. Práticas consolidadas no desenvolvimento de software, como controle de versões e automação de tarefas, também se aplicam à escrita acadêmica \cite{wilson2017}.
+
+\section{Compilação}\label{sec:compilacao}
+
+O modelo é compilado com o \texttt{latexmk} \cite{latexmk}, que executa o \texttt{pdflatex} e o programa de bibliografia quantas vezes forem necessárias para resolver citações, referências cruzadas e sumário. Na pasta do modelo:
+
+\begin{minted}{bash}
+latexmk main.tex      # compila e gera main.pdf
+latexmk -C            # apaga os arquivos gerados
+\end{minted}
+
+O programa de bibliografia depende da versão da ABNT escolhida: o Bib\TeX\ para a versão 2002, com o pacote \texttt{abntex2cite} \cite{abntex2cite}, e o Biber para as versões 2018 e 2023, com os pacotes \texttt{biblatex} \cite{biblatex} e \texttt{biblatex-abnt} \cite{biblatexabnt}. O \texttt{latexmk} detecta qual deles usar, mas, ao trocar de versão, apague os arquivos gerados com \texttt{latexmk -C} antes de compilar.
+
+O pacote \texttt{minted}, usado para código-fonte, precisa do Python 3 instalado. Se não for usar código-fonte, remova a linha \verb|\usepackage{minted}| e os exemplos que usam o ambiente \texttt{minted}.
+
+\subsection{Overleaf}
+
+O Overleaf é um editor de \LaTeX\ on-line. Para usar o modelo nele, baixe o arquivo \texttt{.zip} da versão da ABNT desejada na página de \textit{releases} do repositório e use a opção \textit{New Project} > \textit{Upload Project}.
+
+\subsection{Compilação de todos os modelos}
+
+No repositório do projeto, o \texttt{Makefile} compila todos os modelos em todas as versões da ABNT e gera os pacotes de distribuição:
+
+\begin{minted}{bash}
+make pdf ABNT=2002   # todos os modelos na versão escolhida
+make todas           # todos os modelos nas três versões
+make dist            # pacotes .zip e PDFs em dist/
+\end{minted}
+
+\section{Gerenciadores de referências}\label{sec:gerenciadores}
+
+Gerenciadores de referências organizam a bibliografia da pesquisa e exportam o arquivo \texttt{.bib}. O JabRef\footnote{Disponível em: \url{https://www.jabref.org/}.} edita arquivos \texttt{.bib} diretamente. O Zotero\footnote{Disponível em: \url{https://www.zotero.org/}.}, com a extensão Better Bib\TeX, mantém o arquivo \texttt{.bib} atualizado automaticamente.
+
+\section{Controle de versões}\label{sec:git}
+
+O Git registra o histórico do trabalho e permite recuperar qualquer versão anterior do texto \cite{chacon2014}. Um fluxo mínimo é:
+
+\begin{minted}{bash}
+git init                              # uma vez, na pasta do trabalho
+git add -A
+git commit -m "Escreve a seção de metodologia"
+\end{minted}
+
+Hospedar o repositório em um serviço como o GitHub cria uma cópia de segurança e facilita a revisão pelo orientador. Registrar também os dados, os scripts de análise e as versões dos programas usados permite que os resultados do trabalho sejam reproduzidos \cite{sandve2013}.

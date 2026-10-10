@@ -1,0 +1,179 @@
+% ----------------------------------------------------------
+% Capítulo 5 — Ilustrações, tabelas e outros elementos
+% ----------------------------------------------------------
+\chapter{Ilustrações, Tabelas e Outros Elementos}\label{cap:elementos}
+
+Pela NBR 14724 \cite{abnt14724}, ilustrações (figuras, quadros, gráficos, desenhos, fotografias e outras) têm a identificação na parte superior, com a palavra designativa, o número de ordem e o título. Na parte inferior, indica-se a fonte consultada, obrigatória mesmo quando a ilustração é do próprio autor. Toda ilustração e toda tabela deve ser citada no texto e inserida o mais próximo possível do trecho a que se refere. Para citar um elemento, use \verb|\autoref{rótulo}|, que escreve a palavra designativa e o número, como em ``\autoref{fig:logo}''.
+
+\section{Figuras}\label{sec:figuras}
+
+A \autoref{fig:logo} mostra a inserção de uma imagem. O título vai em \verb|\caption|, antes da imagem, e a fonte em \verb|\fonte|, depois dela. Quando o título é longo, o argumento opcional de \verb|\caption| define um título curto para a lista de ilustrações.
+
+\begin{figure}[htbp]
+	\caption[Logotipo da UFV]{Logotipo da Universidade Federal de Viçosa, usado como exemplo de figura}\label{fig:logo}
+	\centering
+	\includegraphics[width=.4\linewidth]{assets/LogoUFV}
+	\fonte{Universidade Federal de Viçosa.}
+\end{figure}
+
+O código correspondente é:
+
+\begin{minted}{latex}
+\begin{figure}[htbp]
+  \caption[Título curto]{Título completo da figura}\label{fig:logo}
+  \centering
+  \includegraphics[width=.4\linewidth]{assets/LogoUFV}
+  \fonte{Universidade Federal de Viçosa.}
+\end{figure}
+\end{minted}
+
+Prefira imagens vetoriais (PDF ou SVG convertido para PDF) para gráficos e diagramas, e PNG ou JPG para fotografias.
+
+\subsection{Subfiguras}
+
+Figuras compostas são feitas com o ambiente \texttt{subfigure}, como na \autoref{fig:subfiguras}, cujas partes podem ser citadas isoladamente: \autoref{fig:sub-a} e \autoref{fig:sub-b}.
+
+\begin{figure}[htbp]
+	\caption{Exemplo de subfiguras}\label{fig:subfiguras}
+	\centering
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=.8\linewidth]{assets/LogoUFV}
+		\caption{Tamanho maior}\label{fig:sub-a}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\includegraphics[width=.4\linewidth]{assets/LogoUFV}
+		\caption{Tamanho menor}\label{fig:sub-b}
+	\end{subfigure}
+	\fonte{Universidade Federal de Viçosa.}
+\end{figure}
+
+\section{Tabelas}\label{sec:tabelas}
+
+Tabelas apresentam dados numéricos e seguem as Normas de Apresentação Tabular do IBGE \cite{ibge1993}: não têm traços verticais nas bordas laterais, e os traços horizontais delimitam apenas o cabeçalho e o fim da tabela. O comando \verb|\IBGEtab| do abn\TeX2 organiza título, tabela e fonte nesse padrão, como na \autoref{tab:iris}. O pacote \texttt{siunitx} alinha os números pela vírgula decimal.
+
+\begin{table}[htbp]
+	\IBGEtab{%
+		\caption{Estatísticas do conjunto de dados Iris (150 amostras)}\label{tab:iris}
+	}{%
+		\begin{tabular}{lS[table-format=1.1]S[table-format=1.1]S[table-format=1.2]S[table-format=1.2]}
+			\toprule
+			{Atributo (cm)} & {Mínimo} & {Máximo} & {Média} & {Desvio padrão} \\
+			\midrule
+			Comprimento da sépala & 4.3 & 7.9 & 5.84 & 0.83 \\
+			Largura da sépala & 2.0 & 4.4 & 3.05 & 0.43 \\
+			Comprimento da pétala & 1.0 & 6.9 & 3.76 & 1.76 \\
+			Largura da pétala & 0.1 & 2.5 & 1.20 & 0.76 \\
+			\bottomrule
+		\end{tabular}%
+	}{%
+		\fonte{\citeonline{fisher1936}.}%
+	}
+\end{table}
+
+\section{Quadros}\label{sec:quadros}
+
+Quadros apresentam informações textuais organizadas em linhas e colunas, como o \autoref{qua:estrutura} e o \autoref{qua:tipos-bib}. O ambiente \texttt{quadro}, definido no pacote \texttt{abntex2-UFV}, numera os quadros e os inclui na lista de quadros:
+
+\begin{minted}{latex}
+\begin{quadro}[htbp]
+  \caption{Título do quadro}\label{qua:exemplo}
+  \centering
+  \begin{tabular}{ll} ... \end{tabular}
+  \fonte{Elaborado pelo autor.}
+\end{quadro}
+\end{minted}
+
+Um quadro também é útil para cronogramas, como o \autoref{qua:cronograma}.
+
+\begin{quadro}[htbp]
+	\caption{Cronograma do trabalho, em meses}\label{qua:cronograma}
+	\centering
+	\footnotesize
+	\begin{tabular}{lcccccccccccc}
+		\toprule
+		\textbf{Atividade} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} & \textbf{11} & \textbf{12} \\
+		\midrule
+		Revisão bibliográfica & $\bullet$ & $\bullet$ & & & & & & & & & & \\
+		Métodos & & & $\bullet$ & $\bullet$ & & & & & & & & \\
+		Experimentos & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & & & & \\
+		Resultados & & & & & & & $\bullet$ & $\bullet$ & & & & \\
+		Conclusão & & & & & & & $\bullet$ & $\bullet$ & $\bullet$ & & & \\
+		Defesa & & & & & & & & & & $\bullet$ & $\bullet$ & $\bullet$ \\
+		\bottomrule
+	\end{tabular}
+	\fonte{Elaborado pelo autor.}
+\end{quadro}
+
+\section{Equações}\label{sec:equacoes}
+
+Equações em destaque são numeradas e podem ser citadas no texto. A média aritmética $\bar{x}$ de uma amostra com $n$ observações é dada pela \autoref{eq:media}, e o desvio padrão amostral $s$, pela \autoref{eq:desvio}:
+
+\begin{equation}\label{eq:media}
+	\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i
+\end{equation}
+
+\begin{equation}\label{eq:desvio}
+	s = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} \left( x_i - \bar{x} \right)^2}
+\end{equation}
+
+Expressões curtas podem ficar no próprio texto, entre cifrões, como $e^{i\pi} + 1 = 0$. Para equações em várias linhas alinhadas, use o ambiente \texttt{align} do pacote \texttt{amsmath}:
+
+\begin{align}
+	(a + b)^2 &= a^2 + 2ab + b^2 \label{eq:quadrado-soma}\\
+	(a - b)^2 &= a^2 - 2ab + b^2 \label{eq:quadrado-diferenca}
+\end{align}
+
+\section{Algoritmos}\label{sec:algoritmos}
+
+Algoritmos em pseudocódigo são escritos com os pacotes \texttt{algorithm} e \texttt{algpseudocode}, como o \autoref{alg:euclides}.
+
+\begin{algorithm}[htbp]
+	\caption{Máximo divisor comum (algoritmo de Euclides)}\label{alg:euclides}
+	\begin{algorithmic}[1]
+		\Function{MDC}{$a, b$}
+			\While{$b \neq 0$}
+				\State $r \gets a \bmod b$
+				\State $a \gets b$
+				\State $b \gets r$
+			\EndWhile
+			\State \Return $a$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+\section{Código-fonte}\label{sec:codigo}
+
+Trechos de código são apresentados com o pacote \texttt{minted} \cite{minted}, que faz o realce de sintaxe de centenas de linguagens. O código a seguir implementa as Equações~\ref{eq:media} e~\ref{eq:desvio} em Python:
+
+\begin{minted}[linenos]{python}
+from math import sqrt
+
+def media(xs):
+    return sum(xs) / len(xs)
+
+def desvio_padrao(xs):
+    m = media(xs)
+    return sqrt(sum((x - m) ** 2 for x in xs) / (len(xs) - 1))
+\end{minted}
+
+Para um arquivo inteiro, use \verb|\inputminted{python}{caminho/arquivo.py}|. Quando o código precisa de número e título, coloque-o em um ambiente de figura ou quadro.
+
+\section{Alíneas}\label{sec:alineas}
+
+Enumerações dentro de uma seção são feitas em alíneas. Pela NBR 6024 \cite{abnt6024}, o texto que antecede as alíneas termina em dois-pontos; as alíneas são indicadas por letras minúsculas seguidas de parêntese, terminam em ponto e vírgula, exceto a última, que termina em ponto; e subalíneas começam por travessão:
+
+\begin{alineas}
+	\item primeira alínea;
+	\item segunda alínea, com subalíneas:
+	\begin{subalineas}
+		\item primeira subalínea;
+		\item segunda subalínea;
+	\end{subalineas}
+	\item última alínea.
+\end{alineas}
+
+\section{Siglas e símbolos}\label{sec:siglas}
+
+Na primeira ocorrência no texto, a sigla é precedida da forma completa, como em Instituto Brasileiro de Geografia e Estatística (IBGE). Siglas e símbolos usados no trabalho são listados nos ambientes \texttt{siglas} e \texttt{simbolos} do \texttt{main.tex}, em ordem alfabética.
